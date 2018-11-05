@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="a2S-CK-M92">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,39 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
+        <!--Input Controller-->
+        <scene sceneID="eJe-ui-NK3">
+            <objects>
+                <controller id="a2S-CK-M92" customClass="inputController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="46" alignment="left" id="KgP-UQ-H3t">
+                            <items>
+                                <button width="1" alignment="left" title="www." id="sbv-Ai-1YP">
+                                    <connections>
+                                        <action selector="editInput" destination="a2S-CK-M92" id="BQi-1n-FVU"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            <edgeInsets key="margins" left="4" right="4" top="4" bottom="4"/>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="7LI-W8-3mX">
+                            <items>
+                                <button width="1" alignment="left" title="Go!" id="0oy-xg-XdE">
+                                    <connections>
+                                        <action selector="viewWebsite" destination="a2S-CK-M92" id="vVF-dY-UgL"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="inputButton" destination="sbv-Ai-1YP" id="wbx-jD-fe9"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-50" y="304"/>
+        </scene>
         <!--linkViewer-->
         <scene sceneID="aou-V4-d1y">
             <objects>
