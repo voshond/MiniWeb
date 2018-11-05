@@ -34,7 +34,8 @@ struct Link{
 struct Image{
     var image: UIImage? = nil
     var imageURL: URL? = nil
-    var width: Int? = nil
+    var width: CGFloat? = nil
+    var height: CGFloat? = nil
 }
 struct ElementObject{
     var type: type = .unknown
@@ -60,10 +61,12 @@ class InterfaceController: WKInterfaceController {
     <title>Title of webpage</title>
 </head>
 <body>
-    <p>Test <a href="https://chirpapp.io/roadto100">with a link</a> in the middle</p>
+    <p>Test <a href="http://chirpapp.io/roadto100">with a link</a> in the middle</p>
+    <img src="http://chirpapp.io/roadto100/DraggedImage-3.png" width="1960" height="636">
     <p>Is this clickable?</p>
     <b>Test Bold</b>
     <p>This should be, but <a href="https://9to5mac.com">seperately</a></p>
+   
     <div>
         <p>Test</p>
     </div>
@@ -73,6 +76,7 @@ class InterfaceController: WKInterfaceController {
 """
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        URLCache.shared.removeAllCachedResponses()
         if let url = context as? URL{
             self.superUrl = url.absoluteString
         }
@@ -88,7 +92,7 @@ class InterfaceController: WKInterfaceController {
             self.superUrl = superUrl
             self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         } else {
-            var testUrl = URL(string: "https://www.chirapp.io")!
+            var testUrl = URL(string: "http://www.chirapp.io")!
             self.superUrl = testUrl.absoluteString
             self.fetchWebsite(fromUrl: testUrl)
             //self.processHtml(html: html)
@@ -110,15 +114,21 @@ class InterfaceController: WKInterfaceController {
             switch element.tagName(){
             case "img":
                 guard let src = try? element.attr("src") else {return}
-                let screenWidth = WKInterfaceDevice.current().screenBounds.width
-                if let imageWidth = try? element.attr("width"){
-                    
+                let currentDevice = WKInterfaceDevice.current()
+                let screenWidth = Int(currentDevice.screenBounds.width)
+                var image = Image()
+                if let imageWidth = try? element.attr("width"), let imageWidthInt = Int(imageWidth){
+                    let scale = CGFloat(screenWidth) / CGFloat(imageWidthInt)
+                    image.width = scale * CGFloat(imageWidthInt)
+                    if let imageHeight = try? element.attr("height"), let imageHeightInt = Int(imageHeight){
+                        image.height = scale * CGFloat(imageHeightInt)
+                    }
                 }
                 var preposition = (self.superUrl ?? "") + "/"
                 if src.contains("http"){
                     preposition = ""
                 }
-                let image = Image(image: nil, imageURL: URL(string: preposition + src), width: 100)
+                image.imageURL = URL(string: preposition + src)
                 self.elements.append(ElementObject(type: .image, text: nil, image: image))
             case "b":
                 self.elements.append(ElementObject(type: .bold, text: try? element.text() ?? "", image: nil))
@@ -217,6 +227,10 @@ class InterfaceController: WKInterfaceController {
                 if let image = element.image, let imageURL = image.imageURL{
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "ImageCell")
                     if let row = self.WebsiteTabel.rowController(at: index) as? ImageCell{
+                        if let imageHeight = image.height{
+                            row.cellImage.setHeight(imageHeight)
+                        }
+                      
                         if imageURL.absoluteString.hasSuffix(".gif"){
                             let gif = UIImage.gifImageWithURL(imageURL.absoluteString)
                             row.cellImage.setImage(gif)
