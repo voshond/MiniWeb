@@ -42,9 +42,10 @@ struct ElementObject{
     }
 }
 class InterfaceController: WKInterfaceController {
-
+    
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!
     var superUrl: String? = nil
+    var links: [Element] = []
     let html = """
 <!DOCTYPE html>
 <html>
@@ -58,6 +59,7 @@ class InterfaceController: WKInterfaceController {
     <div>
         <p>Test</p>
     </div>
+    <a href="https://9to5mac.com">test link</a>
 </body>
 </html>
 """
@@ -67,7 +69,7 @@ class InterfaceController: WKInterfaceController {
             self.superUrl = url.absoluteString
         }
         // Configure interface objects here.
-       // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
+        // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         if let superUrl = superUrl{
             self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         } else {
@@ -78,93 +80,92 @@ class InterfaceController: WKInterfaceController {
     var elements: [ElementObject] = []
     func processHtml(html: String){
         guard let html = try? SwiftSoup.parse(html) else {return}
-       
-        let children = html.children()
-        for element in children.array(){
-            if let images = try? element.getElementsByTag("img"){
-                for text in images.array(){
-                    guard let src = try? text.attr("src") else {return}
-                    var preposition = (self.superUrl ?? "") + "/"
-                    if src.contains("http"){
-                        preposition = ""
-                    }
-                    self.elements.append(ElementObject(type: .image, text: nil, image: URL(string: preposition + src)!))
+        
+        guard let children = try? html.getAllElements() else {return}
+        
+        for element in children{
+            switch element.tagName(){
+            case "img":
+                guard let src = try? element.attr("src") else {return}
+                var preposition = (self.superUrl ?? "") + "/"
+                if src.contains("http"){
+                    preposition = ""
+                }
+                self.elements.append(ElementObject(type: .image, text: nil, image: URL(string: preposition + src)!))
+                
+            case "a":
+                if self.links.contains(element) {
+                    continue
+                }
+                if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
+                    let startIndex = linkText.startIndex.encodedOffset
+                    let endIndex = linkText.endIndex.encodedOffset
+                    var link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: URL(string: linkHref)!)
+                    self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
                 }
                 
-            }
-            if let textNodes = try? element.getElementsByTag("p"){
-                for textNode in textNodes.array(){
-                    print(textNode)
-                    var objects: [ElementObject] = []
-                    guard var text = try? textNode.text() else {return}
-                    if let links = try? textNode.getElementsByTag("a"){
-                        var asArray = links.array()
-                        if asArray.count == 0{
-                            objects.append(ElementObject(type: .text, text: text, image: nil))
-
-                        }
-                        for link in asArray{
-                            if let linkText = try? link.text(), let linkHref = try? link.attr("href"){
-                                if let startIndex = text.index(of: linkText){
-                                    let endIndex = startIndex + linkText.count
-                                    var beforeLink = text[0 ..< startIndex]
-                                    var afterLink = ""
-                                    if linkText.count == endIndex{
-                                        
-                                    } else {
-                                        //Checks is the upper bound (text.count - 1) is greater than the lower bound (endIndex), if it is return "", else return the differenceli
-                                        afterLink = (text.count - 1) > endIndex ? text[endIndex ... (text.count - 1)] : ""
+            case "p":
+                var objects: [ElementObject] = []
+                guard var text = try? element.text() else {return}
+                if let links = try? element.getElementsByTag("a"){
+                    var asArray = links.array()
+                    if asArray.count == 0{
+                        objects.append(ElementObject(type: .text, text: text, image: nil))
+                        
+                    }
+                    for link in asArray{
+                        self.links.append(link)
+                        if let linkText = try? link.text(), let linkHref = try? link.attr("href"){
+                            if let startIndex = text.index(of: linkText){
+                                let endIndex = startIndex + linkText.count
+                                var beforeLink = text[0 ..< startIndex]
+                                var afterLink = ""
+                                if linkText.count == endIndex{
                                     
-                                    }
-                                    print(beforeLink + "(" + linkText + ")" + afterLink)
-                                    var link = Link(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: (text.count - 1), url: URL(string: linkHref)!)
-                                    self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
-
+                                } else {
+                                    //Checks is the upper bound (text.count - 1) is greater than the lower bound (endIndex), if it is return "", else return the differenceli
+                                    afterLink = (text.count - 1) > endIndex ? text[endIndex ... (text.count - 1)] : ""
+                                    
                                 }
-                                    
+                                print(beforeLink + "(" + linkText + ")" + afterLink)
+                                var link = Link(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: (text.count - 1), url: URL(string: linkHref)!)
+                                self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
                                 
                             }
-                        }
-                    } else {
-                        objects.append(ElementObject(type: .text, text: text, image: nil))
-                    }
-                    for element in objects{
-                        if element.type == .text{
-                            guard let concatenatedText = element.text else {return}
-                            self.elements.append(ElementObject(type: .text, text: concatenatedText, image: nil))
-                        }
-                        if element.type == .link{
-                            guard let concatenatedText = element.text else {return}
-                            guard let url = element.image else {return}
-                            self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url))
+                            
+                            
                         }
                     }
+                } else {
+                    objects.append(ElementObject(type: .text, text: text, image: nil))
                 }
-            }
-            if let header1Nodes = try? element.getElementsByTag("h1"){
-                for header1 in header1Nodes.array(){
-                    guard let text = try? header1.text() else {return}
-                    self.elements.append(ElementObject(type: .header, text: text, image: nil))
+                for element in objects{
+                    if element.type == .text{
+                        guard let concatenatedText = element.text else {return}
+                        self.elements.append(ElementObject(type: .text, text: concatenatedText, image: nil))
+                    }
+                    if element.type == .link{
+                        guard let concatenatedText = element.text else {return}
+                        guard let url = element.image else {return}
+                        self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url))
+                    }
                 }
+            case "h1":
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+            case "h2":
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+            case "h3":
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+            case "h4":
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+            default:
+                print()
             }
-            if let header2Nodes = try? element.getElementsByTag("h2"){
-                for header2 in header2Nodes.array(){
-                    guard let text = try? header2.text() else {return}
-                    self.elements.append(ElementObject(type: .header2, text: text, image: nil))
-                }
-            }
-            if let header3Nodes = try? element.getElementsByTag("h3"){
-                for header3 in header3Nodes.array(){
-                    guard let text = try? header3.text() else {return}
-                    self.elements.append(ElementObject(type: .header3, text: text, image: nil))
-                }
-            }
-            if let header4Nodes = try? element.getElementsByTag("h4"){
-                for header4 in header4Nodes.array(){
-                    guard let text = try? header4.text() else {return}
-                    self.elements.append(ElementObject(type: .header4, text: text, image: nil))
-                }
-            }
+            
             
         }
         for (index, element) in self.elements.enumerated(){
@@ -257,7 +258,7 @@ class InterfaceController: WKInterfaceController {
             }
         }
     }
-
+    
 }
 
 extension String{
