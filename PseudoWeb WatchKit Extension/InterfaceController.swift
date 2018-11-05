@@ -13,6 +13,7 @@ import ImageIO
 
 enum type{
     case title
+    case bold
     case image
     case text
     case unknown
@@ -30,12 +31,17 @@ struct Link{
     var endIndex: Int? = nil
     var url: URL? = nil
 }
+struct Image{
+    var image: UIImage? = nil
+    var imageURL: URL? = nil
+    var width: Int? = nil
+}
 struct ElementObject{
     var type: type = .unknown
     var text: String? = nil
-    var image: URL? = nil
+    var image: Image? = nil
     var Link: Link? = nil
-    init(type: type, text: String? = nil, image: URL? = nil, Link: Link? = nil) {
+    init(type: type, text: String? = nil, image: Image? = nil, Link: Link? = nil) {
         self.type = type
         self.text = text
         self.image = image
@@ -56,6 +62,7 @@ class InterfaceController: WKInterfaceController {
 <body>
     <p>Test <a href="https://chirpapp.io/roadto100">with a link</a> in the middle</p>
     <p>Is this clickable?</p>
+    <b>Test Bold</b>
     <p>This should be, but <a href="https://9to5mac.com">seperately</a></p>
     <div>
         <p>Test</p>
@@ -69,9 +76,15 @@ class InterfaceController: WKInterfaceController {
         if let url = context as? URL{
             self.superUrl = url.absoluteString
         }
+        if let url = context as? String{
+            if url == "localTest"{
+                self.processHtml(html: html)
+            }
+        }
         // Configure interface objects here.
         // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         if let superUrl = superUrl{
+           
             self.superUrl = superUrl
             self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         } else {
@@ -96,16 +109,20 @@ class InterfaceController: WKInterfaceController {
             self.processedElements.append(element)
             switch element.tagName(){
             case "img":
-                
                 guard let src = try? element.attr("src") else {return}
+                let screenWidth = WKInterfaceDevice.current().screenBounds.width
+                if let imageWidth = try? element.attr("width"){
+                    
+                }
                 var preposition = (self.superUrl ?? "") + "/"
                 if src.contains("http"){
                     preposition = ""
                 }
-                self.elements.append(ElementObject(type: .image, text: nil, image: URL(string: preposition + src)!))
-                
+                let image = Image(image: nil, imageURL: URL(string: preposition + src), width: 100)
+                self.elements.append(ElementObject(type: .image, text: nil, image: image))
+            case "b":
+                self.elements.append(ElementObject(type: .bold, text: try? element.text() ?? "", image: nil))
             case "a":
-                
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
                     let startIndex = linkText.startIndex.encodedOffset
                     let endIndex = linkText.endIndex.encodedOffset
@@ -163,6 +180,9 @@ class InterfaceController: WKInterfaceController {
                         self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url))
                     }
                 }
+            case "h":
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .header, text: text, image: nil))
             case "h1":
                 guard let text = try? element.text() else {return}
                 self.elements.append(ElementObject(type: .header, text: text, image: nil))
@@ -194,15 +214,15 @@ class InterfaceController: WKInterfaceController {
                 
                 
             case .image:
-                if let imgUrl = element.image{
+                if let image = element.image, let imageURL = image.imageURL{
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "ImageCell")
                     if let row = self.WebsiteTabel.rowController(at: index) as? ImageCell{
-                        if imgUrl.absoluteString.hasSuffix(".gif"){
-                            let gif = UIImage.gifImageWithURL(imgUrl.absoluteString)
+                        if imageURL.absoluteString.hasSuffix(".gif"){
+                            let gif = UIImage.gifImageWithURL(imageURL.absoluteString)
                             row.cellImage.setImage(gif)
                             row.cellImage.startAnimating()
                         } else {
-                            URLSession.shared.dataTask(with: imgUrl, completionHandler: {data, _, _ in
+                            URLSession.shared.dataTask(with: imageURL, completionHandler: {data, _, _ in
                                 guard let data = data else {return}
                                 
                                 row.cellImage.setImage(UIImage(data: data))
@@ -260,6 +280,14 @@ class InterfaceController: WKInterfaceController {
                         row.linkText.setAttributedText(mutedText)
                         row.url = link.url
                     }
+                }
+            case .bold:
+                if let text = element.text{
+                    self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "BoldCell")
+                    if let row = self.WebsiteTabel.rowController(at: index) as? TextCell{
+                        row.cellText.setText(text)
+                    }
+                    
                 }
             }
         }

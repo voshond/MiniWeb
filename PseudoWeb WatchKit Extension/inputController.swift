@@ -30,6 +30,9 @@ class inputController: WKInterfaceController {
         })
     }
 
+    @IBAction func visitLocalTest() {
+        self.pushController(withName: "linkViewer", context: "localTest")
+    }
     @IBAction func viewWebsite() {
         guard let input = input else {return}
         if let url = URL(string: "http://\(input)"){

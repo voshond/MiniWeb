@@ -24,6 +24,11 @@
                             <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             <edgeInsets key="margins" left="4" right="4" top="4" bottom="4"/>
                         </group>
+                        <button width="1" alignment="left" title="Local Test" id="20O-wx-BJl">
+                            <connections>
+                                <action selector="visitLocalTest" destination="a2S-CK-M92" id="Nu6-U2-fZ7"/>
+                            </connections>
+                        </button>
                         <group width="1" alignment="left" verticalAlignment="bottom" id="7LI-W8-3mX">
                             <items>
                                 <button width="1" alignment="left" title="Go!" id="0oy-xg-XdE">
@@ -48,21 +53,10 @@
                     <items>
                         <table alignment="left" id="eLP-3x-0Yr">
                             <items>
-                                <tableRow identifier="TextCell" selectable="NO" id="8my-jx-9ws" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="4oW-6f-OX5">
-                                        <items>
-                                            <label alignment="left" text="Label" numberOfLines="0" id="kpW-CN-IYr"/>
-                                        </items>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="cellText" destination="kpW-CN-IYr" id="VGf-mz-wW0"/>
-                                    </connections>
-                                </tableRow>
                                 <tableRow identifier="TitleCell" selectable="NO" id="3Zx-ZU-tY1" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="hsZ-2E-Pk3">
                                         <items>
-                                            <label alignment="left" text="Label" numberOfLines="0" id="Ya0-im-vlR">
+                                            <label alignment="left" text="Title" numberOfLines="0" id="Ya0-im-vlR">
                                                 <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                             </label>
                                         </items>
@@ -79,6 +73,30 @@
                                         </items>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </group>
+                                </tableRow>
+                                <tableRow identifier="TextCell" selectable="NO" id="8my-jx-9ws" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="4oW-6f-OX5">
+                                        <items>
+                                            <label alignment="left" text="Paragraph" numberOfLines="0" id="kpW-CN-IYr"/>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="cellText" destination="kpW-CN-IYr" id="VGf-mz-wW0"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="BoldCell" selectable="NO" id="4k4-S7-h5L" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Fc0-FT-96e">
+                                        <items>
+                                            <label alignment="left" text="Bold" numberOfLines="0" id="DAl-zm-4AJ">
+                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="cellText" destination="DAl-zm-4AJ" id="4AG-H5-QKl"/>
+                                    </connections>
                                 </tableRow>
                                 <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Chl-Oc-8nV">
