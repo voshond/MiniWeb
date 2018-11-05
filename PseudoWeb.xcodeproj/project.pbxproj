@@ -20,6 +20,12 @@
 		ED469A002158EBEB008BA35B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */; };
 		ED469A022158EBEB008BA35B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED469A012158EBEB008BA35B /* NotificationController.swift */; };
 		ED469A042158EBEC008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED469A032158EBEC008BA35B /* Assets.xcassets */; };
+		ED5CAD0A21590F5B00F9AA46 /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5CAD0921590F5B00F9AA46 /* LinkCell.swift */; };
+		EDB91CF22158F42D00967A10 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CF02158EDCE00967A10 /* ImageCell.swift */; };
+		EDB91CF32158F43000967A10 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CEC2158ED4400967A10 /* TextCell.swift */; };
+		F7338F53E85E62657CAD3F32 /* Pods_PseudoWeb_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD2FA71CB6C0B017BE01F76 /* Pods_PseudoWeb_WatchKit_App.framework */; };
+		FD248DAA8745C796D076A126 /* Pods_PseudoWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6AE33036EA377FBDF98C29 /* Pods_PseudoWeb.framework */; };
+		FF43B162D2E0AF3BAAD121C1 /* Pods_PseudoWeb_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E53A6E91BD35EDDEA956C8 /* Pods_PseudoWeb_WatchKit_Extension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +71,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04F9DD21ABDA06D43659707C /* Pods-PseudoWeb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb/Pods-PseudoWeb.debug.xcconfig"; sourceTree = "<group>"; };
+		7DD2FA71CB6C0B017BE01F76 /* Pods_PseudoWeb_WatchKit_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PseudoWeb_WatchKit_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD72FD139F6AE00C9183F5C /* Pods-PseudoWeb WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit App/Pods-PseudoWeb WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
+		969ED7FAB69C4A5F7D3FDBD7 /* Pods-PseudoWeb WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		AE6AE33036EA377FBDF98C29 /* Pods_PseudoWeb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PseudoWeb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0E53A6E91BD35EDDEA956C8 /* Pods_PseudoWeb_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PseudoWeb_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3B6640C32BD3D8578B41E45 /* Pods-PseudoWeb WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit App.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit App/Pods-PseudoWeb WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
+		E28E7592959C10AFD89FA491 /* Pods-PseudoWeb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb/Pods-PseudoWeb.release.xcconfig"; sourceTree = "<group>"; };
 		ED4699D72158EBE9008BA35B /* PseudoWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PseudoWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4699DA2158EBE9008BA35B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED4699DC2158EBE9008BA35B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +97,10 @@
 		ED469A032158EBEC008BA35B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED469A052158EBEC008BA35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED469A062158EBEC008BA35B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		ED5CAD0921590F5B00F9AA46 /* LinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
+		EDB91CEC2158ED4400967A10 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		EDB91CF02158EDCE00967A10 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD248DAA8745C796D076A126 /* Pods_PseudoWeb.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +116,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF43B162D2E0AF3BAAD121C1 /* Pods_PseudoWeb_WatchKit_Extension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA5226877D49B87463FE3C3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7338F53E85E62657CAD3F32 /* Pods_PseudoWeb_WatchKit_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D7B48352F443929BB185726 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE6AE33036EA377FBDF98C29 /* Pods_PseudoWeb.framework */,
+				7DD2FA71CB6C0B017BE01F76 /* Pods_PseudoWeb_WatchKit_App.framework */,
+				B0E53A6E91BD35EDDEA956C8 /* Pods_PseudoWeb_WatchKit_Extension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CD5D07D8BEE0FC36B9D911B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04F9DD21ABDA06D43659707C /* Pods-PseudoWeb.debug.xcconfig */,
+				E28E7592959C10AFD89FA491 /* Pods-PseudoWeb.release.xcconfig */,
+				8DD72FD139F6AE00C9183F5C /* Pods-PseudoWeb WatchKit App.debug.xcconfig */,
+				D3B6640C32BD3D8578B41E45 /* Pods-PseudoWeb WatchKit App.release.xcconfig */,
+				FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */,
+				969ED7FAB69C4A5F7D3FDBD7 /* Pods-PseudoWeb WatchKit Extension.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ED4699CE2158EBE9008BA35B = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +161,8 @@
 				ED4699ED2158EBEB008BA35B /* PseudoWeb WatchKit App */,
 				ED4699FC2158EBEB008BA35B /* PseudoWeb WatchKit Extension */,
 				ED4699D82158EBE9008BA35B /* Products */,
+				8CD5D07D8BEE0FC36B9D911B /* Pods */,
+				5D7B48352F443929BB185726 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,7 +192,10 @@
 		ED4699ED2158EBEB008BA35B /* PseudoWeb WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				ED5CAD0921590F5B00F9AA46 /* LinkCell.swift */,
 				ED4699EE2158EBEB008BA35B /* Interface.storyboard */,
+				EDB91CEC2158ED4400967A10 /* TextCell.swift */,
+				EDB91CF02158EDCE00967A10 /* ImageCell.swift */,
 				ED4699F12158EBEB008BA35B /* Assets.xcassets */,
 				ED4699F32158EBEB008BA35B /* Info.plist */,
 			);
@@ -166,6 +222,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED469A112158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb" */;
 			buildPhases = (
+				60606FC047154E928AC5885D /* [CP] Check Pods Manifest.lock */,
 				ED4699D32158EBE9008BA35B /* Sources */,
 				ED4699D42158EBE9008BA35B /* Frameworks */,
 				ED4699D52158EBE9008BA35B /* Resources */,
@@ -185,8 +242,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED469A0D2158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit App" */;
 			buildPhases = (
+				E3FF9C33C72145019C507F4E /* [CP] Check Pods Manifest.lock */,
 				ED4699E72158EBEB008BA35B /* Resources */,
 				ED469A0C2158EBEC008BA35B /* Embed App Extensions */,
+				FA5226877D49B87463FE3C3B /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,9 +261,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED469A092158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit Extension" */;
 			buildPhases = (
+				00B095D04EBA1DE3D8182A68 /* [CP] Check Pods Manifest.lock */,
 				ED4699F42158EBEB008BA35B /* Sources */,
 				ED4699F52158EBEB008BA35B /* Frameworks */,
 				ED4699F62158EBEB008BA35B /* Resources */,
+				EA4D043D4757CB84531FB002 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +291,7 @@
 					};
 					ED4699E82158EBEB008BA35B = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					ED4699F72158EBEB008BA35B = {
 						CreatedOnToolsVersion = 10.0;
@@ -286,6 +348,81 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		00B095D04EBA1DE3D8182A68 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PseudoWeb WatchKit Extension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60606FC047154E928AC5885D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PseudoWeb-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3FF9C33C72145019C507F4E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PseudoWeb WatchKit App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA4D043D4757CB84531FB002 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ED4699D32158EBE9008BA35B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -300,9 +437,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDB91CF32158F43000967A10 /* TextCell.swift in Sources */,
 				ED469A022158EBEB008BA35B /* NotificationController.swift in Sources */,
+				EDB91CF22158F42D00967A10 /* ImageCell.swift in Sources */,
 				ED469A002158EBEB008BA35B /* ExtensionDelegate.swift in Sources */,
 				ED4699FE2158EBEB008BA35B /* InterfaceController.swift in Sources */,
+				ED5CAD0A21590F5B00F9AA46 /* LinkCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +607,7 @@
 		};
 		ED469A0A2158EBEC008BA35B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
@@ -489,6 +630,7 @@
 		};
 		ED469A0B2158EBEC008BA35B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 969ED7FAB69C4A5F7D3FDBD7 /* Pods-PseudoWeb WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
@@ -511,17 +653,25 @@
 		};
 		ED469A0E2158EBEC008BA35B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DD72FD139F6AE00C9183F5C /* Pods-PseudoWeb WatchKit App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8D2NQ6572;
 				IBSC_MODULE = PseudoWeb_WatchKit_Extension;
 				INFOPLIST_FILE = "PseudoWeb WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -530,13 +680,20 @@
 		};
 		ED469A0F2158EBEC008BA35B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3B6640C32BD3D8578B41E45 /* Pods-PseudoWeb WatchKit App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8D2NQ6572;
 				IBSC_MODULE = PseudoWeb_WatchKit_Extension;
 				INFOPLIST_FILE = "PseudoWeb WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -549,6 +706,7 @@
 		};
 		ED469A122158EBEC008BA35B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04F9DD21ABDA06D43659707C /* Pods-PseudoWeb.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -567,6 +725,7 @@
 		};
 		ED469A132158EBEC008BA35B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E28E7592959C10AFD89FA491 /* Pods-PseudoWeb.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
