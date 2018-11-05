@@ -26,6 +26,27 @@
                                         <outlet property="cellText" destination="kpW-CN-IYr" id="VGf-mz-wW0"/>
                                     </connections>
                                 </tableRow>
+                                <tableRow identifier="TitleCell" selectable="NO" id="3Zx-ZU-tY1" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="hsZ-2E-Pk3">
+                                        <items>
+                                            <label alignment="left" text="Label" numberOfLines="0" id="Ya0-im-vlR">
+                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="cellText" destination="Ya0-im-vlR" id="CPp-Uw-WcL"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="SeperatorCell" selectable="NO" id="9bD-s8-YHD">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="jYq-0G-bTu">
+                                        <items>
+                                            <separator height="1" heightAdjustment="7" alignment="left" id="wPy-ux-uXg"/>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                </tableRow>
                                 <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Chl-Oc-8nV">
                                         <items>

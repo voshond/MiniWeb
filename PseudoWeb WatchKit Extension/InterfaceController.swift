@@ -12,6 +12,7 @@ import SwiftSoup
 import ImageIO
 
 enum type{
+    case title
     case image
     case text
     case unknown
@@ -45,7 +46,7 @@ class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!
     var superUrl: String? = nil
-    var links: [Element] = []
+    var processedElements: [Element] = []
     let html = """
 <!DOCTYPE html>
 <html>
@@ -71,21 +72,31 @@ class InterfaceController: WKInterfaceController {
         // Configure interface objects here.
         // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         if let superUrl = superUrl{
+            self.superUrl = superUrl
             self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         } else {
-            //self.fetchWebsite(fromUrl: URL(string: "https://9to5mac.com/2018/09/22/top-20-iphone-xs-and-iphone-xs-max-features-video")!)
-            self.processHtml(html: html)
+            var testUrl = URL(string: "https://www.chirapp.io")!
+            self.superUrl = testUrl.absoluteString
+            self.fetchWebsite(fromUrl: testUrl)
+            //self.processHtml(html: html)
         }
     }
     var elements: [ElementObject] = []
     func processHtml(html: String){
         guard let html = try? SwiftSoup.parse(html) else {return}
-        
+        if let title = try? html.title() {
+           elements.append(ElementObject(type: .title, text: title, image: nil))
+        }
+        guard let body = try? html.body() else {return}
         guard let children = try? html.getAllElements() else {return}
-        
         for element in children{
+            if self.processedElements.contains(element) {
+                continue
+            }
+            self.processedElements.append(element)
             switch element.tagName(){
             case "img":
+                
                 guard let src = try? element.attr("src") else {return}
                 var preposition = (self.superUrl ?? "") + "/"
                 if src.contains("http"){
@@ -94,13 +105,15 @@ class InterfaceController: WKInterfaceController {
                 self.elements.append(ElementObject(type: .image, text: nil, image: URL(string: preposition + src)!))
                 
             case "a":
-                if self.links.contains(element) {
-                    continue
-                }
+                
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
                     let startIndex = linkText.startIndex.encodedOffset
                     let endIndex = linkText.endIndex.encodedOffset
-                    var link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: URL(string: linkHref)!)
+                    var preposition = (self.superUrl ?? "") + "/"
+                    if linkHref.contains("http"){
+                        preposition = ""
+                    }
+                    var link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: URL(string: preposition + linkHref))
                     self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
                 }
                 
@@ -114,7 +127,7 @@ class InterfaceController: WKInterfaceController {
                         
                     }
                     for link in asArray{
-                        self.links.append(link)
+                        self.processedElements.append(link)
                         if let linkText = try? link.text(), let linkHref = try? link.attr("href"){
                             if let startIndex = text.index(of: linkText){
                                 let endIndex = startIndex + linkText.count
@@ -170,6 +183,16 @@ class InterfaceController: WKInterfaceController {
         }
         for (index, element) in self.elements.enumerated(){
             switch element.type{
+            case .title:
+                if let text = element.text{
+                    self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "TitleCell")
+                    if let row = self.WebsiteTabel.rowController(at: index) as? TextCell{
+                        row.cellText.setText(text)
+                    }
+                    
+                }
+                
+                
             case .image:
                 if let imgUrl = element.image{
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "ImageCell")
