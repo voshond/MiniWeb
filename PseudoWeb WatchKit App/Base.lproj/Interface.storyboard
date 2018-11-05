@@ -98,6 +98,22 @@
                                         <outlet property="cellText" destination="DAl-zm-4AJ" id="4AG-H5-QKl"/>
                                     </connections>
                                 </tableRow>
+                                <tableRow identifier="QuoteCell" selectable="NO" id="pQ7-Qf-369" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="0z2-zm-P4i">
+                                        <items>
+                                            <separator alignment="left" id="7ae-u0-2a3"/>
+                                            <label alignment="left" text="long text that is multiple lines" numberOfLines="0" id="hPA-2N-cum">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <edgeInsets key="margins" left="12" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="cellText" destination="hPA-2N-cum" id="bQ1-jI-FEZ"/>
+                                    </connections>
+                                </tableRow>
                                 <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Chl-Oc-8nV">
                                         <items>

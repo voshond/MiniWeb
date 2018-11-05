@@ -14,6 +14,7 @@ import ImageIO
 enum type{
     case title
     case bold
+    case quote
     case image
     case text
     case unknown
@@ -61,22 +62,21 @@ class InterfaceController: WKInterfaceController {
     <title>Title of webpage</title>
 </head>
 <body>
+    <p>Regular text</p>
     <p>Test <a href="http://chirpapp.io/roadto100">with a link</a> in the middle</p>
+    <a href="https://9to5mac.com">Link on its own</a>
+    <q>This is a quote that should span multiple lines</q>
     <img src="http://chirpapp.io/roadto100/DraggedImage-3.png" width="1960" height="636">
-    <p>Is this clickable?</p>
     <b>Test Bold</b>
-    <p>This should be, but <a href="https://9to5mac.com">seperately</a></p>
-   
-    <div>
-        <p>Test</p>
-    </div>
-    <a href="https://9to5mac.com">test link</a>
+    <h>Header 1</h>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <h4>Header 4</h4>
 </body>
 </html>
 """
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        URLCache.shared.removeAllCachedResponses()
         if let url = context as? URL{
             self.superUrl = url.absoluteString
         }
@@ -132,6 +132,8 @@ class InterfaceController: WKInterfaceController {
                 self.elements.append(ElementObject(type: .image, text: nil, image: image))
             case "b":
                 self.elements.append(ElementObject(type: .bold, text: try? element.text() ?? "", image: nil))
+            case "q", "blockquote":
+                self.elements.append(ElementObject(type: .quote, text: try? element.text() ?? "", image: nil))
             case "a":
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
                     let startIndex = linkText.startIndex.encodedOffset
@@ -190,23 +192,21 @@ class InterfaceController: WKInterfaceController {
                         self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url))
                     }
                 }
-            case "h":
-                guard let text = try? element.text() else {return}
-                self.elements.append(ElementObject(type: .header, text: text, image: nil))
-            case "h1":
+            case "h", "h1":
                 guard let text = try? element.text() else {return}
                 self.elements.append(ElementObject(type: .header, text: text, image: nil))
             case "h2":
                 guard let text = try? element.text() else {return}
-                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+                self.elements.append(ElementObject(type: .header2, text: text, image: nil))
             case "h3":
                 guard let text = try? element.text() else {return}
-                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+                self.elements.append(ElementObject(type: .header3, text: text, image: nil))
             case "h4":
                 guard let text = try? element.text() else {return}
-                self.elements.append(ElementObject(type: .header, text: text, image: nil))
+                self.elements.append(ElementObject(type: .header4, text: text, image: nil))
             default:
-                print()
+                guard let text = try? element.text() else {return}
+                self.elements.append(ElementObject(type: .text, text: text, image: nil))
             }
             
             
@@ -247,6 +247,14 @@ class InterfaceController: WKInterfaceController {
             case .text:
                 if let text = element.text{
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "TextCell")
+                    if let row = self.WebsiteTabel.rowController(at: index) as? TextCell{
+                        row.cellText.setText(text)
+                    }
+                    
+                }
+            case .quote:
+                if let text = element.text{
+                    self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "QuoteCell")
                     if let row = self.WebsiteTabel.rowController(at: index) as? TextCell{
                         row.cellText.setText(text)
                     }
