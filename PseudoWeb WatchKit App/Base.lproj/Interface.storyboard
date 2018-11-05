@@ -114,6 +114,12 @@
                                         <outlet property="cellText" destination="hPA-2N-cum" id="bQ1-jI-FEZ"/>
                                     </connections>
                                 </tableRow>
+                                <tableRow identifier="LineBreakCell" selectable="NO" id="Arg-xX-hyc" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="10" alignment="left" id="iX4-f2-HQ5">
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <edgeInsets key="margins" left="12" right="0.0" top="0.0" bottom="0.0"/>
+                                    </group>
+                                </tableRow>
                                 <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Chl-Oc-8nV">
                                         <items>

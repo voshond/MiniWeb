@@ -22,6 +22,7 @@ enum type{
     case header2
     case header3
     case header4
+    case lineBreak
     case link
 }
 struct Link{
@@ -63,6 +64,10 @@ class InterfaceController: WKInterfaceController {
 </head>
 <body>
     <p>Regular text</p>
+    <br>
+    <br>
+    <br>
+    <br>
     <p>Test <a href="http://chirpapp.io/roadto100">with a link</a> in the middle</p>
     <a href="https://9to5mac.com">Link on its own</a>
     <q>This is a quote that should span multiple lines</q>
@@ -132,6 +137,8 @@ class InterfaceController: WKInterfaceController {
                 self.elements.append(ElementObject(type: .image, text: nil, image: image))
             case "b":
                 self.elements.append(ElementObject(type: .bold, text: try? element.text() ?? "", image: nil))
+            case "br":
+                self.elements.append(ElementObject(type: .lineBreak))
             case "q", "blockquote":
                 self.elements.append(ElementObject(type: .quote, text: try? element.text() ?? "", image: nil))
             case "a":
@@ -205,8 +212,7 @@ class InterfaceController: WKInterfaceController {
                 guard let text = try? element.text() else {return}
                 self.elements.append(ElementObject(type: .header4, text: text, image: nil))
             default:
-                guard let text = try? element.text() else {return}
-                self.elements.append(ElementObject(type: .text, text: text, image: nil))
+               print()
             }
             
             
@@ -252,6 +258,8 @@ class InterfaceController: WKInterfaceController {
                     }
                     
                 }
+            case .lineBreak:
+                self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "LineBreakCell")
             case .quote:
                 if let text = element.text{
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "QuoteCell")
