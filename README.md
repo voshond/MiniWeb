@@ -15,3 +15,5 @@ Currently supports:
 * h3
 * h4
 
+## Edge Cases
+Not all websites will work with the article detection. In an attempt to combat this, `forbiddenClasses` has been defined in the `InterfaceController.swift`. This array contains all the classes which should be ignored

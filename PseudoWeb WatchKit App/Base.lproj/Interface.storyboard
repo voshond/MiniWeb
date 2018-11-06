@@ -114,6 +114,20 @@
                                         <outlet property="cellText" destination="hPA-2N-cum" id="bQ1-jI-FEZ"/>
                                     </connections>
                                 </tableRow>
+                                <tableRow identifier="CaptionCell" selectable="NO" id="Rj9-OI-PyY" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" id="Bwx-OE-vcD">
+                                        <items>
+                                            <label alignment="left" text="long text that is multiple lines" numberOfLines="0" id="Kx4-JL-sih">
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="cellText" destination="Kx4-JL-sih" id="gNk-vK-D0t"/>
+                                    </connections>
+                                </tableRow>
                                 <tableRow identifier="LineBreakCell" selectable="NO" id="Arg-xX-hyc" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="10" alignment="left" id="iX4-f2-HQ5">
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
