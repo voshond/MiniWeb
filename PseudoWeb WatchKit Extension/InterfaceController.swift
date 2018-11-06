@@ -87,7 +87,8 @@ class InterfaceController: WKInterfaceController {
         }
         if let url = context as? String{
             if url == "localTest"{
-                self.processHtml(html: html)
+                self.fetchWebsite(fromUrl: URL(string: "https://9to5mac.com/2018/10/22/iphone-xs-max-beats-google-pixel-3-xl/")!)
+                //self.processHtml(html: html)
             }
         }
         // Configure interface objects here.
@@ -110,7 +111,12 @@ class InterfaceController: WKInterfaceController {
            elements.append(ElementObject(type: .title, text: title, image: nil))
         }
         guard let body = try? html.body() else {return}
-        guard let children = try? html.getAllElements() else {return}
+        guard var children = try? html.getAllElements() else {return}
+        if let div = children.first(where: {$0.tagName() == "div" && ((try? $0.text()) ?? "").count > 2000}){
+            if let allElemnents = try? div.getAllElements(){
+                children = allElemnents
+            }
+        }
         for element in children{
             if self.processedElements.contains(element) {
                 continue
