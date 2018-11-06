@@ -90,10 +90,10 @@ class InterfaceController: WKInterfaceController {
         }
         if let url = context as? String{
             if url == "localTest"{
-                //let testUrl = URL(string: "https://www.9news.com.au/2018/11/06/11/29/angela-jay-police-shooting-inquest")!
-//                self.fetchWebsite(fromUrl: testUrl)
-//                self.superUrl = testUrl.host ?? ""
-                self.processHtml(html: html)
+                let testUrl = URL(string: "https://apolloapp.io")!
+               self.fetchWebsite(fromUrl: testUrl)
+                self.superUrl = testUrl.host ?? ""
+               // self.processHtml(html: html)
             }
         }
         // Configure interface objects here.
