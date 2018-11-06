@@ -4,10 +4,12 @@ This is a small project attempting to recreate Safari's 'Reader Mode' in WatchKi
 
 Currently supports:
 
+* a
 * img
 * b
+* br
+* q, blockquote
 * p
-* a
 * h1
 * h2
 * h3
