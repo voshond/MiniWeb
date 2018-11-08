@@ -22,6 +22,12 @@
 		ED469A022158EBEB008BA35B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED469A012158EBEB008BA35B /* NotificationController.swift */; };
 		ED469A042158EBEC008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED469A032158EBEC008BA35B /* Assets.xcassets */; };
 		ED5CAD0A21590F5B00F9AA46 /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5CAD0921590F5B00F9AA46 /* LinkCell.swift */; };
+		ED710B0B2193B0910095B601 /* ElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B0A2193B0910095B601 /* ElementType.swift */; };
+		ED710B0D2193B09F0095B601 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B0C2193B09F0095B601 /* Image.swift */; };
+		ED710B0F2193B0A90095B601 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B0E2193B0A90095B601 /* Link.swift */; };
+		ED710B112193B0B40095B601 /* ElementObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B102193B0B40095B601 /* ElementObject.swift */; };
+		ED710B132193B0C20095B601 /* TestHtml.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B122193B0C20095B601 /* TestHtml.swift */; };
+		ED710B152193B19F0095B601 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B142193B19F0095B601 /* Text.swift */; };
 		EDB91CF22158F42D00967A10 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CF02158EDCE00967A10 /* ImageCell.swift */; };
 		EDB91CF32158F43000967A10 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CEC2158ED4400967A10 /* TextCell.swift */; };
 		F7338F53E85E62657CAD3F32 /* Pods_PseudoWeb_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD2FA71CB6C0B017BE01F76 /* Pods_PseudoWeb_WatchKit_App.framework */; };
@@ -100,6 +106,12 @@
 		ED469A052158EBEC008BA35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED469A062158EBEC008BA35B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		ED5CAD0921590F5B00F9AA46 /* LinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
+		ED710B0A2193B0910095B601 /* ElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementType.swift; sourceTree = "<group>"; };
+		ED710B0C2193B09F0095B601 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		ED710B0E2193B0A90095B601 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
+		ED710B102193B0B40095B601 /* ElementObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementObject.swift; sourceTree = "<group>"; };
+		ED710B122193B0C20095B601 /* TestHtml.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHtml.swift; sourceTree = "<group>"; };
+		ED710B142193B19F0095B601 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		EDB91CEC2158ED4400967A10 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		EDB91CF02158EDCE00967A10 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +219,12 @@
 		ED4699FC2158EBEB008BA35B /* PseudoWeb WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				ED710B142193B19F0095B601 /* Text.swift */,
+				ED710B0A2193B0910095B601 /* ElementType.swift */,
+				ED710B0C2193B09F0095B601 /* Image.swift */,
+				ED710B0E2193B0A90095B601 /* Link.swift */,
+				ED710B102193B0B40095B601 /* ElementObject.swift */,
+				ED710B122193B0C20095B601 /* TestHtml.swift */,
 				ED07EB5121905AB20057800A /* inputController.swift */,
 				ED4699FD2158EBEB008BA35B /* InterfaceController.swift */,
 				ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */,
@@ -440,13 +458,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED710B0B2193B0910095B601 /* ElementType.swift in Sources */,
+				ED710B112193B0B40095B601 /* ElementObject.swift in Sources */,
+				ED710B0D2193B09F0095B601 /* Image.swift in Sources */,
 				EDB91CF32158F43000967A10 /* TextCell.swift in Sources */,
 				ED469A022158EBEB008BA35B /* NotificationController.swift in Sources */,
 				EDB91CF22158F42D00967A10 /* ImageCell.swift in Sources */,
 				ED07EB5221905AB20057800A /* inputController.swift in Sources */,
 				ED469A002158EBEB008BA35B /* ExtensionDelegate.swift in Sources */,
+				ED710B152193B19F0095B601 /* Text.swift in Sources */,
 				ED4699FE2158EBEB008BA35B /* InterfaceController.swift in Sources */,
 				ED5CAD0A21590F5B00F9AA46 /* LinkCell.swift in Sources */,
+				ED710B132193B0C20095B601 /* TestHtml.swift in Sources */,
+				ED710B0F2193B0A90095B601 /* Link.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

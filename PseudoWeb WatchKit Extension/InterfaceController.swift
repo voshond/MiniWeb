@@ -11,78 +11,17 @@ import Foundation
 import SwiftSoup
 import ImageIO
 
-enum type{
-    case title
-    case caption
-    case bold
-    case quote
-    case image
-    case text
-    case unknown
-    case header
-    case header2
-    case header3
-    case header4
-    case lineBreak
-    case link
-}
-struct Link{
-    var startText: String? = nil
-    var startIndex: Int? = nil
-    var linkText: String? = nil
-    var endText: String? = nil
-    var endIndex: Int? = nil
-    var url: URL? = nil
-}
-struct Image{
-    var image: UIImage? = nil
-    var imageURL: URL? = nil
-    var width: CGFloat? = nil
-    var height: CGFloat? = nil
-}
-struct ElementObject{
-    var type: type = .unknown
-    var text: String? = nil
-    var image: Image? = nil
-    var Link: Link? = nil
-    init(type: type, text: String? = nil, image: Image? = nil, Link: Link? = nil) {
-        self.type = type
-        self.text = text
-        self.image = image
-        self.Link = Link
-    }
-}
+
+
+
 class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!
     var forbiddenClasses: [String] = ["header-module__inner", "brand brand--9News"]
     var superUrl: String? = nil
     var processedElements: [Element] = []
-    let html = """
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Title of webpage</title>
-</head>
-<body>
-    <p>Regular text</p>
-    <br>
-    <br>
-    <br>
-    <br>
-    <p>Test <a href="http://chirpapp.io/roadto100">with a link</a> in the middle</p>
-    <a href="https://9to5mac.com">Link on its own</a>
-    <q>This is a quote that should span multiple lines</q>
-    <img src="http://chirpapp.io/roadto100/DraggedImage-3.png" width="1960" height="636">
-    <figcaption>The above image shows an issue</figcaption>
-    <b>Test Bold</b>
-    <h>Header 1</h>
-    <h2>Header 2</h2>
-    <h3>Header 3</h3>
-    <h4>Header 4</h4>
-</body>
-</html>
-"""
+    var html = TestHtml.html
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         if let url = context as? URL{
@@ -91,9 +30,9 @@ class InterfaceController: WKInterfaceController {
         if let url = context as? String{
             if url == "localTest"{
                 let testUrl = URL(string: "https://apolloapp.io")!
-               self.fetchWebsite(fromUrl: testUrl)
-                self.superUrl = testUrl.host ?? ""
-               // self.processHtml(html: html)
+                //self.fetchWebsite(fromUrl: testUrl)
+                //self.superUrl = testUrl.host ?? ""
+                self.processHtml(html: html)
             }
         }
         // Configure interface objects here.
@@ -145,22 +84,8 @@ class InterfaceController: WKInterfaceController {
             self.processedElements.append(element)
             switch element.tagName(){
             case "img":
-                guard let src = try? element.attr("src") else {return}
-                let currentDevice = WKInterfaceDevice.current()
-                let screenWidth = Int(currentDevice.screenBounds.width)
-                var image = Image()
-                if let imageWidth = try? element.attr("width"), let imageWidthInt = Int(imageWidth){
-                    let scale = CGFloat(screenWidth) / CGFloat(imageWidthInt)
-                    image.width = scale * CGFloat(imageWidthInt)
-                    if let imageHeight = try? element.attr("height"), let imageHeightInt = Int(imageHeight){
-                        image.height = scale * CGFloat(imageHeightInt)
-                    }
-                }
-                var preposition = (self.superUrl ?? "") + "/"
-                if src.contains("http"){
-                    preposition = ""
-                }
-                image.imageURL = URL(string: preposition + src)
+                let image = Image.findImages(in: element, withSuperUrl: self.superUrl)
+        
                 self.elements.append(ElementObject(type: .image, text: nil, image: image))
             case "b":
                 guard let text = try? element.text() else {return}
@@ -333,7 +258,7 @@ class InterfaceController: WKInterfaceController {
             }
         }
     }
-    func findLinksIn(element: Element, withText text: String, withType type: type) -> [ElementObject]{
+    func findLinksIn(element: Element, withText text: String, withType type: ElementType) -> [ElementObject]{
         var objects = [ElementObject]()
         if let links = try? element.getElementsByTag("a"){
             var asArray = links.array()
@@ -369,7 +294,7 @@ class InterfaceController: WKInterfaceController {
         }
         return objects
     }
-    func processObjects(objects: [ElementObject], withParentType type: type){
+    func processObjects(objects: [ElementObject], withParentType type: ElementType){
         for element in objects{
             if element.type == type{
                 guard let concatenatedText = element.text else {return}
