@@ -26,18 +26,20 @@ class InterfaceController: WKInterfaceController {
         super.awake(withContext: context)
         if let url = context as? URL{
             self.superUrl = url.absoluteString
+            self.fetchWebsite(fromUrl: url)
+            self.superUrl = url.host ?? ""
         }
         if let url = context as? String{
             if url == "localTest"{
-                let testUrl = URL(string: "https://apolloapp.io")!
-                //self.fetchWebsite(fromUrl: testUrl)
-                //self.superUrl = testUrl.host ?? ""
-                self.processHtml(html: html)
+                let testUrl = URL(string: "https://www.abc.net.au/news/2018-11-08/eurydice-dixon-jaymes-todd-guilty-plea-rape-murder/10475992")!
+                self.fetchWebsite(fromUrl: testUrl)
+                self.superUrl = testUrl.host ?? ""
+                //self.processHtml(html: html)
             }
         }
         // Configure interface objects here.
         // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
-       
+        
     }
     var elements: [ElementObject] = []
     func isValidDiv(element: Element) -> Bool{
@@ -53,7 +55,7 @@ class InterfaceController: WKInterfaceController {
         }
         guard let allElements = try? element.getAllElements() else {return false}
         return allElements.contains(where: {
-                $0.tagName() == "h"  ||
+            $0.tagName() == "h"  ||
                 $0.tagName() == "h1" ||
                 $0.tagName() == "h2" ||
                 $0.tagName() == "h3" ||
@@ -66,7 +68,9 @@ class InterfaceController: WKInterfaceController {
     func processHtml(html: String){
         guard let html = try? SwiftSoup.parse(html) else {return}
         if let title = try? html.title() {
-           elements.append(ElementObject(type: .title, text: title, image: nil))
+            elements.append(ElementObject(type: .title, text: title, image: nil))
+            //elements.append(ElementObject(type: .seperator))
+            
         }
         guard let body = try? html.body() else {return}
         guard var children = try? html.getAllElements() else {return}
@@ -85,7 +89,7 @@ class InterfaceController: WKInterfaceController {
             switch element.tagName(){
             case "img":
                 let image = Image.findImages(in: element, withSuperUrl: self.superUrl)
-        
+                
                 self.elements.append(ElementObject(type: .image, text: nil, image: image))
             case "b":
                 guard let text = try? element.text() else {return}
@@ -134,18 +138,24 @@ class InterfaceController: WKInterfaceController {
                 guard let text = try? element.text() else {return}
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
                 self.processObjects(objects: objects, withParentType: .header4)
+            case "hr":
+                self.elements.append(ElementObject(type: .seperator))
             default:
-               print()
+                print()
             }
             
             
         }
         self.setupPage(withElements: self.elements)
-    
+        
         
     }
     func setupPage(withElements elements: [ElementObject]){
         for (index, element) in elements.enumerated(){
+            print("///")
+            print(index)
+            print(element)
+            print("///")
             switch element.type{
             case .title:
                 if let text = element.text{
@@ -155,6 +165,9 @@ class InterfaceController: WKInterfaceController {
                     }
                     
                 }
+                
+            case .seperator:
+                self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "SeperatorCell")
                 
                 
             case .image:
