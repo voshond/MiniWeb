@@ -98,15 +98,15 @@ class InterfaceController: WKInterfaceController {
                 
                 self.elements.append(ElementObject(type: .image, image: image))
             case "b":
-                guard let text = try? element.text() else {return}
+                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .bold)
                 self.processObjects(objects: objects, withParentType: .bold)
             case "br":
                 self.elements.append(ElementObject(type: .lineBreak))
             case "q", "blockquote":
-                self.elements.append(ElementObject(type: .quote, text: try? element.text()))
+                self.elements.append(ElementObject(type: .quote, text: try? element.ownText()))
             case "caption", "figcaption":
-                self.elements.append(ElementObject(type: .caption, text: try? element.text()))
+                self.elements.append(ElementObject(type: .caption, text: try? element.ownText()))
             case "a":
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
                     let startIndex = linkText.startIndex.encodedOffset
@@ -126,23 +126,28 @@ class InterfaceController: WKInterfaceController {
             case "hr":
                 self.elements.append(ElementObject(type: .seperator))
             case "p":
-                guard let text = try? element.text() else {return}
+                let text = element.ownText()
+                if ((try? element.className()) ?? "").contains("caption"){ //If the class contains "caption", treat it like a caption and not text
+                    self.elements.append(ElementObject(type: .caption, text: try? element.ownText()))
+                    continue
+                }
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
                 self.processObjects(objects: objects, withParentType: .text)
+            
             case "h", "h1":
-                guard let text = try? element.text() else {return}
+                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header)
                 self.processObjects(objects: objects, withParentType: .header)
             case "h2":
-                guard let text = try? element.text() else {return}
+                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header2)
                 self.processObjects(objects: objects, withParentType: .header2)
             case "h3":
-                guard let text = try? element.text() else {return}
+                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header3)
                 self.processObjects(objects: objects, withParentType: .header3)
             case "h4":
-                guard let text = try? element.text() else {return}
+                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
                 self.processObjects(objects: objects, withParentType: .header4)
             default:
