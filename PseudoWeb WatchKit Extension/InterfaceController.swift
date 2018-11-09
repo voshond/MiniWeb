@@ -31,10 +31,10 @@ class InterfaceController: WKInterfaceController {
         }
         if let url = context as? String{
             if url == "localTest"{
-                let testUrl = URL(string: "https://www.abc.net.au/news/2018-11-08/eurydice-dixon-jaymes-todd-guilty-plea-rape-murder/10475992")!
-                self.fetchWebsite(fromUrl: testUrl)
-                self.superUrl = testUrl.host ?? ""
-                //self.processHtml(html: html)
+                //let testUrl = URL(string: "https://www.abc.net.au/news/2018-11-08/eurydice-dixon-jaymes-todd-guilty-plea-rape-murder/10475992")!
+                //self.fetchWebsite(fromUrl: testUrl)
+                //self.superUrl = testUrl.host ?? ""
+                self.processHtml(html: html)
             }
         }
         // Configure interface objects here.
@@ -63,16 +63,14 @@ class InterfaceController: WKInterfaceController {
                 $0.tagName() == "h5" ||
                 $0.tagName() == "h6"
         })
-        return false
     }
     func processHtml(html: String){
         guard let html = try? SwiftSoup.parse(html) else {return}
         if let title = try? html.title() {
-            elements.append(ElementObject(type: .title, text: title, image: nil))
-            //elements.append(ElementObject(type: .seperator))
+            elements.append(ElementObject(type: .title, text: title))
+            elements.append(ElementObject(type: .seperator))
             
         }
-        guard let body = try? html.body() else {return}
         guard var children = try? html.getAllElements() else {return}
         if let div = children.first(where: {isValidDiv(element: $0)}){
             if let allElemnents = try? div.getAllElements(){
@@ -90,7 +88,7 @@ class InterfaceController: WKInterfaceController {
             case "img":
                 let image = Image.findImages(in: element, withSuperUrl: self.superUrl)
                 
-                self.elements.append(ElementObject(type: .image, text: nil, image: image))
+                self.elements.append(ElementObject(type: .image, image: image))
             case "b":
                 guard let text = try? element.text() else {return}
                 let objects = self.findLinksIn(element: element, withText: text, withType: .bold)
@@ -98,9 +96,9 @@ class InterfaceController: WKInterfaceController {
             case "br":
                 self.elements.append(ElementObject(type: .lineBreak))
             case "q", "blockquote":
-                self.elements.append(ElementObject(type: .quote, text: try? element.text(), image: nil))
+                self.elements.append(ElementObject(type: .quote, text: try? element.text()))
             case "caption", "figcaption":
-                self.elements.append(ElementObject(type: .caption, text: try? element.text(), image: nil))
+                self.elements.append(ElementObject(type: .caption, text: try? element.text()))
             case "a":
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
                     let startIndex = linkText.startIndex.encodedOffset
@@ -112,12 +110,13 @@ class InterfaceController: WKInterfaceController {
                     if linkHref == "#"{
                         continue
                     }
-                    var linkUrl = URL(string: preposition + linkHref)
+                    let linkUrl = URL(string: preposition + linkHref)
                     
-                    var link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: linkUrl)
-                    self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
+                    let link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: linkUrl)
+                    self.elements.append(ElementObject(type: .link, Link: link))
                 }
-                
+            case "hr":
+                self.elements.append(ElementObject(type: .seperator))
             case "p":
                 guard let text = try? element.text() else {return}
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
@@ -138,8 +137,6 @@ class InterfaceController: WKInterfaceController {
                 guard let text = try? element.text() else {return}
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
                 self.processObjects(objects: objects, withParentType: .header4)
-            case "hr":
-                self.elements.append(ElementObject(type: .seperator))
             default:
                 print()
             }
@@ -274,9 +271,9 @@ class InterfaceController: WKInterfaceController {
     func findLinksIn(element: Element, withText text: String, withType type: ElementType) -> [ElementObject]{
         var objects = [ElementObject]()
         if let links = try? element.getElementsByTag("a"){
-            var asArray = links.array()
+            let asArray = links.array()
             if asArray.count == 0{
-                objects.append(ElementObject(type: type, text: text, image: nil))
+                objects.append(ElementObject(type: type, text: text))
                 
             }
             for link in asArray{
@@ -284,7 +281,7 @@ class InterfaceController: WKInterfaceController {
                 if let linkText = try? link.text(), let linkHref = try? link.attr("href"){
                     if let startIndex = text.index(of: linkText){
                         let endIndex = startIndex + linkText.count
-                        var beforeLink = text[0 ..< startIndex]
+                        let beforeLink = text[0 ..< startIndex]
                         var afterLink = ""
                         if linkText.count == endIndex{
                             
@@ -294,8 +291,8 @@ class InterfaceController: WKInterfaceController {
                             
                         }
                         print(beforeLink + "(" + linkText + ")" + afterLink)
-                        var link = Link(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: (text.count - 1), url: URL(string: linkHref)!)
-                        self.elements.append(ElementObject(type: .link, text: nil, image: nil, Link: link))
+                        let link = Link(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: (text.count - 1), url: URL(string: linkHref)!)
+                        self.elements.append(ElementObject(type: .link, Link: link))
                         
                     }
                     
@@ -303,7 +300,7 @@ class InterfaceController: WKInterfaceController {
                 }
             }
         } else {
-            objects.append(ElementObject(type: type, text: text, image: nil))
+            objects.append(ElementObject(type: type, text: text))
         }
         return objects
     }
@@ -311,7 +308,7 @@ class InterfaceController: WKInterfaceController {
         for element in objects{
             if element.type == type{
                 guard let concatenatedText = element.text else {return}
-                self.elements.append(ElementObject(type: type, text: concatenatedText, image: nil))
+                self.elements.append(ElementObject(type: type, text: concatenatedText))
             }
             if element.type == .link{
                 guard let concatenatedText = element.text else {return}
@@ -343,7 +340,7 @@ class InterfaceController: WKInterfaceController {
 extension String{
     func index(of target: String) -> Int? {
         if let range = self.range(of: target) {
-            return characters.distance(from: startIndex, to: range.lowerBound)
+            return self.distance(from: startIndex, to: range.lowerBound)
         } else {
             return nil
         }
@@ -383,12 +380,12 @@ extension UIImage {
     }
     
     public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL:URL? = URL(string: gifUrl)
+        guard let bundleURL: URL = URL(string: gifUrl)
             else {
                 print("image named \"\(gifUrl)\" doesn't exist")
                 return nil
         }
-        guard let imageData = try? Data(contentsOf: bundleURL!) else {
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
             print("image named \"\(gifUrl)\" into NSData")
             return nil
         }

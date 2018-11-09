@@ -30,6 +30,7 @@
 		ED710B152193B19F0095B601 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710B142193B19F0095B601 /* Text.swift */; };
 		EDB91CF22158F42D00967A10 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CF02158EDCE00967A10 /* ImageCell.swift */; };
 		EDB91CF32158F43000967A10 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB91CEC2158ED4400967A10 /* TextCell.swift */; };
+		EDBFCBE421950F5F00815080 /* TestHtml.html in Resources */ = {isa = PBXBuildFile; fileRef = EDBFCBE321950F5F00815080 /* TestHtml.html */; };
 		F7338F53E85E62657CAD3F32 /* Pods_PseudoWeb_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD2FA71CB6C0B017BE01F76 /* Pods_PseudoWeb_WatchKit_App.framework */; };
 		FD248DAA8745C796D076A126 /* Pods_PseudoWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6AE33036EA377FBDF98C29 /* Pods_PseudoWeb.framework */; };
 		FF43B162D2E0AF3BAAD121C1 /* Pods_PseudoWeb_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E53A6E91BD35EDDEA956C8 /* Pods_PseudoWeb_WatchKit_Extension.framework */; };
@@ -114,6 +115,7 @@
 		ED710B142193B19F0095B601 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		EDB91CEC2158ED4400967A10 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		EDB91CF02158EDCE00967A10 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		EDBFCBE321950F5F00815080 /* TestHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = TestHtml.html; sourceTree = "<group>"; };
 		FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,6 +231,7 @@
 				ED4699FD2158EBEB008BA35B /* InterfaceController.swift */,
 				ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */,
 				ED469A012158EBEB008BA35B /* NotificationController.swift */,
+				EDBFCBE321950F5F00815080 /* TestHtml.html */,
 				ED469A032158EBEC008BA35B /* Assets.xcassets */,
 				ED469A052158EBEC008BA35B /* Info.plist */,
 				ED469A062158EBEC008BA35B /* PushNotificationPayload.apns */,
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED469A042158EBEC008BA35B /* Assets.xcassets in Resources */,
+				EDBFCBE421950F5F00815080 /* TestHtml.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

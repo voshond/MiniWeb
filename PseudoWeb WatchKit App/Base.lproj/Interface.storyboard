@@ -66,14 +66,6 @@
                                         <outlet property="cellText" destination="Ya0-im-vlR" id="CPp-Uw-WcL"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="SeperatorCell" selectable="NO" id="9bD-s8-YHD">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="jYq-0G-bTu">
-                                        <items>
-                                            <separator height="1" heightAdjustment="7" alignment="left" id="wPy-ux-uXg"/>
-                                        </items>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </group>
-                                </tableRow>
                                 <tableRow identifier="TextCell" selectable="NO" id="8my-jx-9ws" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="4oW-6f-OX5">
                                         <items>
@@ -84,6 +76,14 @@
                                     <connections>
                                         <outlet property="cellText" destination="kpW-CN-IYr" id="VGf-mz-wW0"/>
                                     </connections>
+                                </tableRow>
+                                <tableRow identifier="SeperatorCell" selectable="NO" id="jJ7-tb-pbJ" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Fba-Ny-2wI">
+                                        <items>
+                                            <separator alignment="left" id="Woe-4j-xLS"/>
+                                        </items>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
                                 </tableRow>
                                 <tableRow identifier="BoldCell" selectable="NO" id="4k4-S7-h5L" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Fc0-FT-96e">
