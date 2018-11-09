@@ -19,8 +19,9 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!
     var forbiddenClasses: [String] = ["header-module__inner", "brand brand--9News"]
     var superUrl: String? = nil
+    var accessibilityWebsiteContents: String? = nil
     var processedElements: [Element] = []
-    var html = TestHtml.html
+    var htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html")
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -33,8 +34,14 @@ class InterfaceController: WKInterfaceController {
             if url == "localTest"{
                 //let testUrl = URL(string: "https://www.abc.net.au/news/2018-11-08/eurydice-dixon-jaymes-todd-guilty-plea-rape-murder/10475992")!
                 //self.fetchWebsite(fromUrl: testUrl)
+            
                 //self.superUrl = testUrl.host ?? ""
-                self.processHtml(html: html)
+                guard let htmlFile = htmlFile else {return}
+                
+                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
+                    self.processHtml(html: htmlContents)
+
+                }
             }
         }
         // Configure interface objects here.
