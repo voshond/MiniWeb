@@ -21,6 +21,7 @@ class InterfaceController: WKInterfaceController {
     var superUrl: String? = nil
     var accessibilityWebsiteContents: String? = nil
     var processedElements: [Element] = []
+    var elements: [ElementObject] = []
     var htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html")
     
     override func awake(withContext context: Any?) {
@@ -32,23 +33,23 @@ class InterfaceController: WKInterfaceController {
         }
         if let url = context as? String{
             if url == "localTest"{
-                //let testUrl = URL(string: "https://www.abc.net.au/news/2018-11-08/eurydice-dixon-jaymes-todd-guilty-plea-rape-murder/10475992")!
-                //self.fetchWebsite(fromUrl: testUrl)
+                let testUrl = URL(string: "https://www.news.com.au/world/north-america/dramatic-firing-proof-trump-is-in-panic-mode-over-russia-probe/news-story/672ac00312e5ef2787c304fc8f9ebcbc")!
+                self.fetchWebsite(fromUrl: testUrl)
             
-                //self.superUrl = testUrl.host ?? ""
-                guard let htmlFile = htmlFile else {return}
-                
-                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
-                    self.processHtml(html: htmlContents)
-
-                }
-            }
+                self.superUrl = testUrl.host ?? ""
+//                guard let htmlFile = htmlFile else {return}
+//
+//                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
+//                    self.processHtml(html: htmlContents)
+//
+//                }
+//            }
         }
         // Configure interface objects here.
         // self.fetchWebsite(fromUrl: URL(string: superUrl)!)
         
+        }
     }
-    var elements: [ElementObject] = []
     func isValidDiv(element: Element) -> Bool{
         if !(element.tagName() == "div"){
             return false
