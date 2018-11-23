@@ -12,12 +12,20 @@ import SwiftSoup
 import ImageIO
 
 
-
+enum NetworkStatus{
+    case loading
+    case loaded
+    case failed(_ reason: String?)
+    case unknown
+}
 
 class InterfaceController: WKInterfaceController {
     
     //Yeah I spelt 'table' wrong, so what?
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!
+    @IBOutlet weak var loadingIndicator: WKInterfaceImage!
+    @IBOutlet weak var loadFailedLabel: WKInterfaceLabel!
+    @IBOutlet weak var indicatorGroup: WKInterfaceGroup!
     
     //This array lists classes which the article detector will ignore
     var forbiddenClasses: [String] = ["header-module__inner", "brand brand--9News"]
@@ -34,23 +42,57 @@ class InterfaceController: WKInterfaceController {
     //All elements
     var elements: [ElementObject] = []
     
+    var networkStatus: NetworkStatus = .unknown {
+        didSet{
+            switch networkStatus{
+            case .loading:
+                self.indicatorGroup.setHidden(false)
+ self.loadingIndicator.setImageNamed("Activity")
+                self.loadingIndicator.setHeight(35)
+                self.loadingIndicator.setWidth(35)
+                self.loadingIndicator.startAnimating()
+                self.loadFailedLabel.setHidden(true)
+                self.WebsiteTabel.setHidden(true)
+            case .failed(let reason):
+                self.indicatorGroup.setHidden(false)
+                self.loadFailedLabel.setText(reason)
+                self.loadingIndicator.setImageNamed("Error")
+                self.loadingIndicator.setHeight(50)
+                self.loadingIndicator.setWidth(50)
+                self.loadFailedLabel.setHidden(false)
+                self.WebsiteTabel.setHidden(true)
+
+
+            case .loaded:
+                self.indicatorGroup.setHidden(true)
+                self.loadingIndicator.stopAnimating()
+                self.loadingIndicator.setHidden(true)
+                self.WebsiteTabel.setHidden(false)
+
+                self.loadFailedLabel.setHidden(true)
+                
+            case .unknown:
+                print()
+            }
+        }
+    }
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         //If the Interface Controller was instantiated with a URL
         if let url = context as? URL{
-            self.parentUrl = url.absoluteString
             self.fetchWebsite(fromUrl: url)
-            self.parentUrl = url.host ?? ""
+            self.parentUrl =  (url.absoluteString.starts(with: "http") ? "" : "http://") + (url.absoluteString)
         }
         
         //Or if it was passed a string
         if let url = context as? String{
             if url == "localTest"{
-                let testUrl = URL(string: "https://www.news.com.au/world/north-america/dramatic-firing-proof-trump-is-in-panic-mode-over-russia-probe/news-story/672ac00312e5ef2787c304fc8f9ebcbc")!
+                let testUrl = URL(string: "https://apolloapp.io")!
                 self.fetchWebsite(fromUrl: testUrl)
-            
-                self.parentUrl = testUrl.host ?? ""
+                
+                self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
 //                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
 //
 //                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
@@ -233,9 +275,7 @@ class InterfaceController: WKInterfaceController {
                             row.cellImage.startAnimating()
                         } else { //Otherwise
                             URLSession.shared.dataTask(with: imageURL, completionHandler: {data, _, _ in
-                                guard let data = data else {return}
-                                //If the data returned is valid, create a UIImage from it and set the image in the row.
-                                row.cellImage.setImage(UIImage(data: data))
+                                row.cellImage.setImageData(data)
                             }).resume()
                         }
                     }
@@ -323,6 +363,7 @@ class InterfaceController: WKInterfaceController {
                 }
             }
         }
+        self.networkStatus = .loaded
     }
     func findLinksIn(element: Element, withText text: String, withType type: ElementType) -> [ElementObject]{
         var objects = [ElementObject]()
@@ -383,7 +424,11 @@ class InterfaceController: WKInterfaceController {
         }
     }
     func fetchWebsite(fromUrl url: URL){
+        self.networkStatus = .loading
         URLSession.shared.dataTask(with: url, completionHandler: {data, response, error in
+            if let error = error{
+                self.networkStatus = .failed(error.localizedDescription)
+            }
             guard let data = data else {return}
             //Convert the returned data to a String
             guard let responseString = String(data: data, encoding: String.Encoding.utf8) else {return}

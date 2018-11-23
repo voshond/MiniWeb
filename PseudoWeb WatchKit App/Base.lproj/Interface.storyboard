@@ -49,8 +49,16 @@
         <!--linkViewer-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="linkViewer" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
+                <controller identifier="linkViewer" fullBounds="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
                     <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="HRn-0I-17g">
+                            <items>
+                                <imageView width="35" height="35" alignment="center" verticalAlignment="center" image="Error" id="A44-Ts-uJO"/>
+                                <label alignment="center" verticalAlignment="bottom" text="This website failed to load" numberOfLines="0" id="jE3-f2-T2d">
+                                    <color key="textColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                        </group>
                         <table alignment="left" id="eLP-3x-0Yr">
                             <items>
                                 <tableRow identifier="TitleCell" selectable="NO" id="3Zx-ZU-tY1" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
@@ -216,10 +224,13 @@
                     </items>
                     <connections>
                         <outlet property="WebsiteTabel" destination="eLP-3x-0Yr" id="6ay-Y7-dv3"/>
+                        <outlet property="indicatorGroup" destination="HRn-0I-17g" id="Bxs-H1-d9i"/>
+                        <outlet property="loadFailedLabel" destination="jE3-f2-T2d" id="krq-dJ-2zq"/>
+                        <outlet property="loadingIndicator" destination="A44-Ts-uJO" id="l5G-vc-Yp3"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="310"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
