@@ -49,7 +49,7 @@
         <!--linkViewer-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="linkViewer" fullBounds="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
+                <controller identifier="linkViewer" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="eLP-3x-0Yr">
                             <items>
