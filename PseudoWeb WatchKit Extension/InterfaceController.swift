@@ -47,7 +47,7 @@ class InterfaceController: WKInterfaceController {
             switch networkStatus{
             case .loading:
                 self.indicatorGroup.setHidden(false)
- self.loadingIndicator.setImageNamed("Activity")
+                self.loadingIndicator.setImageNamed("Activity")
                 self.loadingIndicator.setHeight(35)
                 self.loadingIndicator.setWidth(35)
                 self.loadingIndicator.startAnimating()
@@ -84,6 +84,8 @@ class InterfaceController: WKInterfaceController {
         if let url = context as? URL{
             self.fetchWebsite(fromUrl: url)
             self.parentUrl =  (url.absoluteString.starts(with: "http") ? "" : "http://") + (url.absoluteString)
+            self.setTitle(url.host)
+
         }
         
         //Or if it was passed a string
@@ -91,7 +93,7 @@ class InterfaceController: WKInterfaceController {
             if url == "localTest"{
                 let testUrl = URL(string: "https://apolloapp.io")!
                 self.fetchWebsite(fromUrl: testUrl)
-                
+                self.setTitle(testUrl.host)
                 self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
 //                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
 //
