@@ -113,7 +113,7 @@
 		ED710B142193B19F0095B601 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		EDB91CEC2158ED4400967A10 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		EDB91CF02158EDCE00967A10 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		EDBFCBE321950F5F00815080 /* TestHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = TestHtml.html; sourceTree = "<group>"; };
+		EDBFCBE321950F5F00815080 /* TestHtml.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = TestHtml.html; path = Assets.xcassets/TestHtml.dataset/TestHtml.html; sourceTree = "<group>"; };
 		FC677E284558EA70BECD325E /* Pods-PseudoWeb WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit Extension/Pods-PseudoWeb WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

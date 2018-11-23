@@ -10,7 +10,7 @@ import Foundation
 import WatchKit
 
 class ImageCell: NSObject{
-    @IBOutlet weak var cellImage: WKInterfaceImage!
+    @IBOutlet weak var cellImage: WKInterfaceImage?
     
 }
 

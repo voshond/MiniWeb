@@ -42,6 +42,9 @@ class InterfaceController: WKInterfaceController {
     //All elements
     var elements: [ElementObject] = []
     
+    //Lets '#something' adresses work
+    var addressLookup: [String: Int] = [:]
+    
     var networkStatus: NetworkStatus = .unknown {
         didSet{
             switch networkStatus{
@@ -52,7 +55,6 @@ class InterfaceController: WKInterfaceController {
                 self.loadingIndicator.setWidth(35)
                 self.loadingIndicator.startAnimating()
                 self.loadFailedLabel.setHidden(true)
-                self.WebsiteTabel.setHidden(true)
             case .failed(let reason):
                 self.indicatorGroup.setHidden(false)
                 self.loadFailedLabel.setText(reason)
@@ -60,17 +62,14 @@ class InterfaceController: WKInterfaceController {
                 self.loadingIndicator.setHeight(50)
                 self.loadingIndicator.setWidth(50)
                 self.loadFailedLabel.setHidden(false)
-                self.WebsiteTabel.setHidden(true)
 
 
             case .loaded:
                 self.indicatorGroup.setHidden(true)
                 self.loadingIndicator.stopAnimating()
-                self.loadingIndicator.setHidden(true)
                 self.WebsiteTabel.setHidden(false)
 
                 self.loadFailedLabel.setHidden(true)
-                
             case .unknown:
                 print()
             }
@@ -161,6 +160,7 @@ class InterfaceController: WKInterfaceController {
         }
         
         //Iterate over every element and process it
+        var nextId: String? = nil
         for element in children{
             //If the element has already been processed, skip it
             if self.processedElements.contains(element) {
@@ -173,19 +173,23 @@ class InterfaceController: WKInterfaceController {
                 //Find the image in the element
                 let image = Image.findImages(in: element, withSuperUrl: self.parentUrl)
                 //Append the image to the elements array
-                self.elements.append(ElementObject(type: .image, image: image))
+                self.elements.append(ElementObject(type: .image, image: image, id: nextId))
+                nextId = nil
             case "b":
                 let text = element.ownText()
                 //Find any links in the element
                 let objects = self.findLinksIn(element: element, withText: text, withType: .bold)
                 //Process the response. If the element contains a link, it'll be converted to a regular text object with a link, otherwise it will remain as its type.
-                self.processObjects(objects: objects, withParentType: .bold)
+                self.processObjects(objects: objects, withParentType: .bold, nextId: nextId)
+                nextId = nil
             case "br":
                 self.elements.append(ElementObject(type: .lineBreak))
             case "q", "blockquote":
-                self.elements.append(ElementObject(type: .quote, text: element.ownText()))
+                self.elements.append(ElementObject(type: .quote, text: element.ownText(), id: nextId))
+                nextId = nil
             case "caption", "figcaption":
-                self.elements.append(ElementObject(type: .caption, text: element.ownText()))
+                self.elements.append(ElementObject(type: .caption, text: element.ownText(), id: nextId))
+                nextId = nil
             case "a":
                 //If a links text can be found as well as the href, begin processing it
                 if let linkText = try? element.text(), let linkHref = try? element.attr("href"){
@@ -196,7 +200,7 @@ class InterfaceController: WKInterfaceController {
                     //Set the URL preposition to the parentUrl with a trailing slash
                     var preposition = (self.parentUrl ?? "") + "/"
                     //If the link is a direct link (ie: contains http), use no preposition
-                    if linkHref.contains("http"){
+                    if linkHref.contains("http") || linkHref.starts(with: "#"){
                         preposition = ""
                     }
                     //If the link is a Javascript link, ignore it.
@@ -205,10 +209,12 @@ class InterfaceController: WKInterfaceController {
                     }
                     let linkUrl = URL(string: preposition + linkHref)
                     let link = Link(startText: "", startIndex: startIndex, linkText: linkText, endText: "", endIndex: endIndex, url: linkUrl)
-                    self.elements.append(ElementObject(type: .link, Link: link))
+                    self.elements.append(ElementObject(type: .link, Link: link, id: nextId))
+                    nextId = nil
                 }
             case "hr":
-                self.elements.append(ElementObject(type: .seperator))
+                self.elements.append(ElementObject(type: .seperator, id: nextId))
+                nextId = nil
             case "p":
                 let text = element.ownText()
                 if ((try? element.className()) ?? "").contains("caption"){ //If the class contains "caption", treat it like a caption and not text
@@ -216,24 +222,35 @@ class InterfaceController: WKInterfaceController {
                     continue
                 }
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
-                self.processObjects(objects: objects, withParentType: .text)
+                self.processObjects(objects: objects, withParentType: .text, nextId: nextId)
+                 nextId = nil
             
             case "h", "h1":
                  let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header)
-                self.processObjects(objects: objects, withParentType: .header)
+                 self.processObjects(objects: objects, withParentType: .header, nextId: nextId)
+                 nextId = nil
             case "h2":
                  let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header2)
-                self.processObjects(objects: objects, withParentType: .header2)
+                 self.processObjects(objects: objects, withParentType: .header2, nextId: nextId)
+                 nextId = nil
             case "h3":
-                 let text = element.ownText()
+                let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header3)
-                self.processObjects(objects: objects, withParentType: .header3)
+                self.processObjects(objects: objects, withParentType: .header3, nextId: nextId)
+                 nextId = nil
             case "h4":
                  let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
-                self.processObjects(objects: objects, withParentType: .header4)
+                 self.processObjects(objects: objects, withParentType: .header4, nextId: nextId)
+                 nextId = nil
+            case "div":
+                let id = element.id()
+                if id.count > 0{
+                    nextId = id
+                }
+                
             default:
                 print()
             }
@@ -246,6 +263,9 @@ class InterfaceController: WKInterfaceController {
     }
     func setupPage(withElements elements: [ElementObject]){
         for (index, element) in elements.enumerated(){
+            if let id = element.id{
+                self.addressLookup["#" + id] = index
+            }
             switch element.type{
             case .title:
                 if let text = element.text{
@@ -268,16 +288,16 @@ class InterfaceController: WKInterfaceController {
                     if let row = self.WebsiteTabel.rowController(at: index) as? ImageCell{
                         //If the height of the image is specified, set the height to prevent text jumping aorund
                         if let imageHeight = image.height{
-                            row.cellImage.setHeight(imageHeight)
+                            row.cellImage?.setHeight(imageHeight)
                         }
                         //If the URL is a GIF, treat it as such
                         if imageURL.absoluteString.hasSuffix(".gif"){
                             let gif = UIImage.gifImageWithURL(imageURL.absoluteString)
-                            row.cellImage.setImage(gif)
-                            row.cellImage.startAnimating()
+                            row.cellImage?.setImage(gif)
+                            row.cellImage?.startAnimating()
                         } else { //Otherwise
                             URLSession.shared.dataTask(with: imageURL, completionHandler: {data, _, _ in
-                                row.cellImage.setImageData(data)
+                                row.cellImage?.setImageData(data)
                             }).resume()
                         }
                     }
@@ -412,16 +432,16 @@ class InterfaceController: WKInterfaceController {
         //Return all text and or link objects
         return objects
     }
-    func processObjects(objects: [ElementObject], withParentType type: ElementType){
+    func processObjects(objects: [ElementObject], withParentType type: ElementType, nextId: String?){
         for element in objects{
             if element.type == type{
                 guard let concatenatedText = element.text else {return}
-                self.elements.append(ElementObject(type: type, text: concatenatedText))
+                self.elements.append(ElementObject(type: type, text: concatenatedText, id: nextId))
             }
             if element.type == .link{
                 guard let concatenatedText = element.text else {return}
                 guard let url = element.image else {return}
-                self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url))
+                self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url, id: nextId))
             }
         }
     }
@@ -444,8 +464,16 @@ class InterfaceController: WKInterfaceController {
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         if let row = self.WebsiteTabel.rowController(at: rowIndex) as? LinkCell{
             //If a URL can be found in the row, load the linkViewer (self) and begin loading the URL
-            if let url = row.url{
-                self.pushController(withName: "linkViewer", context: url)
+                if let url = row.url{
+                if url.absoluteString.starts(with: "#"){
+                    if let index = self.addressLookup[url.absoluteString]{
+                        self.WebsiteTabel.scrollToRow(at: index)
+                        
+                    }
+                    
+                }   else {
+                    self.pushController(withName: "linkViewer", context: url)
+                }
             }
         }
     }
