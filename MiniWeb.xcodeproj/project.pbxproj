@@ -13,11 +13,11 @@
 		ED4699E02158EBE9008BA35B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699DE2158EBE9008BA35B /* Main.storyboard */; };
 		ED4699E22158EBEB008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED4699E12158EBEB008BA35B /* Assets.xcassets */; };
 		ED4699E52158EBEB008BA35B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699E32158EBEB008BA35B /* LaunchScreen.storyboard */; };
-		ED4699EA2158EBEB008BA35B /* PseudoWeb WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED4699E92158EBEB008BA35B /* PseudoWeb WatchKit App.app */; };
+		ED4699EA2158EBEB008BA35B /* MiniWeb WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED4699E92158EBEB008BA35B /* MiniWeb WatchKit App.app */; };
 		ED4699F02158EBEB008BA35B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699EE2158EBEB008BA35B /* Interface.storyboard */; };
 		ED4699F22158EBEB008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED4699F12158EBEB008BA35B /* Assets.xcassets */; };
-		ED4699F92158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ED4699F82158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		ED4699FE2158EBEB008BA35B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699FD2158EBEB008BA35B /* InterfaceController.swift */; };
+		ED4699F92158EBEB008BA35B /* MiniWeb WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ED4699F82158EBEB008BA35B /* MiniWeb WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		ED4699FE2158EBEB008BA35B /* MiniWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699FD2158EBEB008BA35B /* MiniWebController.swift */; };
 		ED469A002158EBEB008BA35B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */; };
 		ED469A022158EBEB008BA35B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED469A012158EBEB008BA35B /* NotificationController.swift */; };
 		ED469A042158EBEC008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED469A032158EBEC008BA35B /* Assets.xcassets */; };
@@ -59,7 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				ED4699F92158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex in Embed App Extensions */,
+				ED4699F92158EBEB008BA35B /* MiniWeb WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +70,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				ED4699EA2158EBEB008BA35B /* PseudoWeb WatchKit App.app in Embed Watch Content */,
+				ED4699EA2158EBEB008BA35B /* MiniWeb WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,19 +87,19 @@
 		D3B6640C32BD3D8578B41E45 /* Pods-PseudoWeb WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit App.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit App/Pods-PseudoWeb WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		E28E7592959C10AFD89FA491 /* Pods-PseudoWeb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb/Pods-PseudoWeb.release.xcconfig"; sourceTree = "<group>"; };
 		ED07EB5121905AB20057800A /* inputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputController.swift; sourceTree = "<group>"; };
-		ED4699D72158EBE9008BA35B /* PseudoWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PseudoWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4699D72158EBE9008BA35B /* MiniWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4699DA2158EBE9008BA35B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED4699DC2158EBE9008BA35B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED4699DF2158EBE9008BA35B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED4699E12158EBEB008BA35B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED4699E42158EBEB008BA35B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED4699E62158EBEB008BA35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED4699E92158EBEB008BA35B /* PseudoWeb WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PseudoWeb WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4699E92158EBEB008BA35B /* MiniWeb WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MiniWeb WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4699EF2158EBEB008BA35B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		ED4699F12158EBEB008BA35B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED4699F32158EBEB008BA35B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED4699F82158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PseudoWeb WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED4699FD2158EBEB008BA35B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		ED4699F82158EBEB008BA35B /* MiniWeb WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MiniWeb WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4699FD2158EBEB008BA35B /* MiniWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniWebController.swift; sourceTree = "<group>"; };
 		ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		ED469A012158EBEB008BA35B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		ED469A032158EBEC008BA35B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -183,9 +183,9 @@
 		ED4699D82158EBE9008BA35B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED4699D72158EBE9008BA35B /* PseudoWeb.app */,
-				ED4699E92158EBEB008BA35B /* PseudoWeb WatchKit App.app */,
-				ED4699F82158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex */,
+				ED4699D72158EBE9008BA35B /* MiniWeb.app */,
+				ED4699E92158EBEB008BA35B /* MiniWeb WatchKit App.app */,
+				ED4699F82158EBEB008BA35B /* MiniWeb WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				ED710B0E2193B0A90095B601 /* Link.swift */,
 				ED710B102193B0B40095B601 /* ElementObject.swift */,
 				ED07EB5121905AB20057800A /* inputController.swift */,
-				ED4699FD2158EBEB008BA35B /* InterfaceController.swift */,
+				ED4699FD2158EBEB008BA35B /* MiniWebController.swift */,
 				ED4699FF2158EBEB008BA35B /* ExtensionDelegate.swift */,
 				ED469A012158EBEB008BA35B /* NotificationController.swift */,
 				EDBFCBE321950F5F00815080 /* TestHtml.html */,
@@ -239,9 +239,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ED4699D62158EBE9008BA35B /* PseudoWeb */ = {
+		ED4699D62158EBE9008BA35B /* MiniWeb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED469A112158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb" */;
+			buildConfigurationList = ED469A112158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb" */;
 			buildPhases = (
 				60606FC047154E928AC5885D /* [CP] Check Pods Manifest.lock */,
 				ED4699D32158EBE9008BA35B /* Sources */,
@@ -254,14 +254,14 @@
 			dependencies = (
 				ED4699EC2158EBEB008BA35B /* PBXTargetDependency */,
 			);
-			name = PseudoWeb;
+			name = MiniWeb;
 			productName = PseudoWeb;
-			productReference = ED4699D72158EBE9008BA35B /* PseudoWeb.app */;
+			productReference = ED4699D72158EBE9008BA35B /* MiniWeb.app */;
 			productType = "com.apple.product-type.application";
 		};
-		ED4699E82158EBEB008BA35B /* PseudoWeb WatchKit App */ = {
+		ED4699E82158EBEB008BA35B /* MiniWeb WatchKit App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED469A0D2158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit App" */;
+			buildConfigurationList = ED469A0D2158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb WatchKit App" */;
 			buildPhases = (
 				E3FF9C33C72145019C507F4E /* [CP] Check Pods Manifest.lock */,
 				ED4699E72158EBEB008BA35B /* Resources */,
@@ -273,14 +273,14 @@
 			dependencies = (
 				ED4699FB2158EBEB008BA35B /* PBXTargetDependency */,
 			);
-			name = "PseudoWeb WatchKit App";
+			name = "MiniWeb WatchKit App";
 			productName = "PseudoWeb WatchKit App";
-			productReference = ED4699E92158EBEB008BA35B /* PseudoWeb WatchKit App.app */;
+			productReference = ED4699E92158EBEB008BA35B /* MiniWeb WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		ED4699F72158EBEB008BA35B /* PseudoWeb WatchKit Extension */ = {
+		ED4699F72158EBEB008BA35B /* MiniWeb WatchKit Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED469A092158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit Extension" */;
+			buildConfigurationList = ED469A092158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb WatchKit Extension" */;
 			buildPhases = (
 				00B095D04EBA1DE3D8182A68 /* [CP] Check Pods Manifest.lock */,
 				ED4699F42158EBEB008BA35B /* Sources */,
@@ -292,9 +292,9 @@
 			);
 			dependencies = (
 			);
-			name = "PseudoWeb WatchKit Extension";
+			name = "MiniWeb WatchKit Extension";
 			productName = "PseudoWeb WatchKit Extension";
-			productReference = ED4699F82158EBEB008BA35B /* PseudoWeb WatchKit Extension.appex */;
+			productReference = ED4699F82158EBEB008BA35B /* MiniWeb WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
@@ -319,7 +319,7 @@
 					};
 				};
 			};
-			buildConfigurationList = ED4699D22158EBE9008BA35B /* Build configuration list for PBXProject "PseudoWeb" */;
+			buildConfigurationList = ED4699D22158EBE9008BA35B /* Build configuration list for PBXProject "MiniWeb" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -332,9 +332,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED4699D62158EBE9008BA35B /* PseudoWeb */,
-				ED4699E82158EBEB008BA35B /* PseudoWeb WatchKit App */,
-				ED4699F72158EBEB008BA35B /* PseudoWeb WatchKit Extension */,
+				ED4699D62158EBE9008BA35B /* MiniWeb */,
+				ED4699E82158EBEB008BA35B /* MiniWeb WatchKit App */,
+				ED4699F72158EBEB008BA35B /* MiniWeb WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -468,7 +468,7 @@
 				ED07EB5221905AB20057800A /* inputController.swift in Sources */,
 				ED469A002158EBEB008BA35B /* ExtensionDelegate.swift in Sources */,
 				ED710B152193B19F0095B601 /* Text.swift in Sources */,
-				ED4699FE2158EBEB008BA35B /* InterfaceController.swift in Sources */,
+				ED4699FE2158EBEB008BA35B /* MiniWebController.swift in Sources */,
 				ED5CAD0A21590F5B00F9AA46 /* LinkCell.swift in Sources */,
 				ED710B0F2193B0A90095B601 /* Link.swift in Sources */,
 			);
@@ -479,12 +479,12 @@
 /* Begin PBXTargetDependency section */
 		ED4699EC2158EBEB008BA35B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ED4699E82158EBEB008BA35B /* PseudoWeb WatchKit App */;
+			target = ED4699E82158EBEB008BA35B /* MiniWeb WatchKit App */;
 			targetProxy = ED4699EB2158EBEB008BA35B /* PBXContainerItemProxy */;
 		};
 		ED4699FB2158EBEB008BA35B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = ED4699F72158EBEB008BA35B /* PseudoWeb WatchKit Extension */;
+			target = ED4699F72158EBEB008BA35B /* MiniWeb WatchKit Extension */;
 			targetProxy = ED4699FA2158EBEB008BA35B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -744,7 +744,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -763,7 +763,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,7 +773,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED4699D22158EBE9008BA35B /* Build configuration list for PBXProject "PseudoWeb" */ = {
+		ED4699D22158EBE9008BA35B /* Build configuration list for PBXProject "MiniWeb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED469A072158EBEC008BA35B /* Debug */,
@@ -782,7 +782,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED469A092158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit Extension" */ = {
+		ED469A092158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED469A0A2158EBEC008BA35B /* Debug */,
@@ -791,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED469A0D2158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb WatchKit App" */ = {
+		ED469A0D2158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED469A0E2158EBEC008BA35B /* Debug */,
@@ -800,7 +800,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED469A112158EBEC008BA35B /* Build configuration list for PBXNativeTarget "PseudoWeb" */ = {
+		ED469A112158EBEC008BA35B /* Build configuration list for PBXNativeTarget "MiniWeb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED469A122158EBEC008BA35B /* Debug */,

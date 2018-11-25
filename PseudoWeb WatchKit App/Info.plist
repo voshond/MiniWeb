@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.willbishop.PseudoWeb</string>
+	<string>com.willbishop.MiniWeb</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

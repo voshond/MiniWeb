@@ -4,6 +4,21 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>MiniWeb WatchKit App (Notification).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>MiniWeb WatchKit App.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>MiniWeb.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 		<key>PseudoWeb WatchKit App (Notification).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +27,7 @@
 		<key>PseudoWeb WatchKit App (Notification).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>21</integer>
 		</dict>
 		<key>PseudoWeb WatchKit App.xcscheme</key>
 		<dict>
@@ -22,7 +37,7 @@
 		<key>PseudoWeb WatchKit App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>20</integer>
 		</dict>
 		<key>PseudoWeb.xcscheme</key>
 		<dict>
@@ -32,7 +47,7 @@
 		<key>PseudoWeb.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>19</integer>
 		</dict>
 	</dict>
 </dict>

@@ -19,7 +19,7 @@ enum NetworkStatus{
     case unknown
 }
 
-class InterfaceController: WKInterfaceController {
+class MiniWebController: WKInterfaceController {
     
     //Yeah I spelt 'table' wrong, so what?
     @IBOutlet weak var WebsiteTabel: WKInterfaceTable!

@@ -11,7 +11,7 @@
         <!--Input Controller-->
         <scene sceneID="eJe-ui-NK3">
             <objects>
-                <controller id="a2S-CK-M92" customClass="inputController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
+                <controller id="a2S-CK-M92" customClass="inputController" customModule="MiniWeb_WatchKit_App" customModuleProvider="target">
                     <items>
                         <group width="1" height="46" alignment="left" id="KgP-UQ-H3t">
                             <items>
@@ -49,7 +49,7 @@
         <!--linkViewer-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="linkViewer" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target">
+                <controller identifier="linkViewer" id="AgC-eL-Hgc" customClass="MiniWebController" customModule="MiniWeb_WatchKit_Extension">
                     <items>
                         <table alignment="left" id="eLP-3x-0Yr">
                             <items>
@@ -216,7 +216,7 @@
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="HRn-0I-17g">
                             <items>
                                 <imageView width="35" height="35" alignment="center" verticalAlignment="center" image="Error" id="A44-Ts-uJO"/>
-                                <label alignment="center" verticalAlignment="bottom" text="This website failed to load" numberOfLines="0" id="jE3-f2-T2d">
+                                <label alignment="center" verticalAlignment="bottom" text="This website failed to load" textAlignment="center" numberOfLines="0" id="jE3-f2-T2d">
                                     <color key="textColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                             </items>
@@ -252,14 +252,14 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="MiniWeb_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="PseudoWeb_WatchKit_App" customModuleProvider="target"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="MiniWeb_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="345"/>
         </scene>
