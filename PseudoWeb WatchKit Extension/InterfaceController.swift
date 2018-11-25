@@ -27,6 +27,9 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var loadFailedLabel: WKInterfaceLabel!
     @IBOutlet weak var indicatorGroup: WKInterfaceGroup!
     
+    //List of row types
+    var rowTypes: [String] = ["TitleCell", "SeperatorCell", "ImageCell", "LinebreakCell", "CaptionCell", "QuoteCell", "Header", "Header2", "Header3", "Header4", "LinkCell", "BoldCell"]
+    
     //This array lists classes which the article detector will ignore
     var forbiddenClasses: [String] = ["header-module__inner", "brand brand--9News"]
     
@@ -44,6 +47,13 @@ class InterfaceController: WKInterfaceController {
     
     //Lets '#something' adresses work
     var addressLookup: [String: Int] = [:]
+    
+    //Contents before fancy article detection
+    var originalContents = Elements()
+    var originalHtml: String? = nil
+    
+    //Custom User-Agent
+    var userAgent: String? = nil
     
     var networkStatus: NetworkStatus = .unknown {
         didSet{
@@ -90,7 +100,7 @@ class InterfaceController: WKInterfaceController {
         //Or if it was passed a string
         if let url = context as? String{
             if url == "localTest"{
-                let testUrl = URL(string: "https://apolloapp.io")!
+                let testUrl = URL(string: "http://whatsmyuseragent.org")!
                 self.fetchWebsite(fromUrl: testUrl)
                 self.setTitle(testUrl.host)
                 self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
@@ -100,18 +110,20 @@ class InterfaceController: WKInterfaceController {
 //                    self.processHtml(html: htmlContents)
 //
 //                }
-//            }
+            }
         }
         
-        }
+        
     }
     
-    //Article Detector
-    //This function takes an element and attmepts to determine whether or not the element contains an article
-    //1. Eensures it is a <div>
-    //2. See if the character count is above 2000 (roughly 400 word article)
-    //3. See if the <div> class is forbidden or not
-    //4. Checks if the <div> contains a header
+    /*
+        Article Detector
+        This function takes an element and attmepts to determine whether or not the element contains an article
+        1. Eensures it is a <div>
+        2. See if the character count is above 2000 (roughly 400 word article)
+        3. See if the <div> class is forbidden or not
+        4. Checks if the <div> contains a header
+    */
     func isValidDiv(element: Element) -> Bool{
         //1
         if !(element.tagName() == "div"){
@@ -139,8 +151,8 @@ class InterfaceController: WKInterfaceController {
     }
     func processHtml(html: String){
         //Convert the String into a Document
+        self.originalHtml = html
         guard let html = try? SwiftSoup.parse(html) else {return}
-
         //If a title exists, create a ElementObject of type title, and then add a seperator
         if let title = try? html.title() {
             elements.append(ElementObject(type: .title, text: title))
@@ -149,9 +161,11 @@ class InterfaceController: WKInterfaceController {
         }
         //Get all elements on the page
         guard var children = try? html.getAllElements() else {return}
-        
+        self.originalContents = children
         //Checks for an article
+        
         if let div = children.first(where: {isValidDiv(element: $0)}){
+            self.addMenuItem(with: WKMenuItemIcon.resume, title: "View Entire Page", action: #selector(viewWithoutDetection))
             //If an article is found, get all the elements
             if let allElemnents = try? div.getAllElements(){
                 //Overwrite the list of elements with only the articles contents
@@ -160,8 +174,39 @@ class InterfaceController: WKInterfaceController {
         }
         
         //Iterate over every element and process it
+        self.processObjects(objects: children)
+        self.setupPage(withElements: self.elements)
+        
+        
+    }
+    @objc func viewAsArticle(){
+        guard let html = self.originalHtml else {return}
+        self.clearAllMenuItems()
+        self.processedElements.removeAll()
+        self.elements.removeAll()
+        self.addressLookup.removeAll()
+        self.removeAllRows()
+        self.processHtml(html: html)
+        
+    }
+    func removeAllRows(){
+        for type in rowTypes{
+            self.WebsiteTabel.setNumberOfRows(0, withRowType: type)
+        }
+    }
+    @objc func viewWithoutDetection(){
+        self.clearAllMenuItems()
+        self.addMenuItem(with: .repeat, title: "View As Article" , action: #selector(viewAsArticle))
+        self.processedElements.removeAll()
+        self.elements.removeAll()
+        self.addressLookup.removeAll()
+        self.removeAllRows()
+        self.processObjects(objects: self.originalContents)
+        self.setupPage(withElements: self.elements)
+    }
+    func processObjects(objects: Elements){
         var nextId: String? = nil
-        for element in children{
+        for element in objects{
             //If the element has already been processed, skip it
             if self.processedElements.contains(element) {
                 continue
@@ -223,28 +268,28 @@ class InterfaceController: WKInterfaceController {
                 }
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
                 self.processObjects(objects: objects, withParentType: .text, nextId: nextId)
-                 nextId = nil
-            
+                nextId = nil
+                
             case "h", "h1":
-                 let text = element.ownText()
+                let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header)
-                 self.processObjects(objects: objects, withParentType: .header, nextId: nextId)
-                 nextId = nil
+                self.processObjects(objects: objects, withParentType: .header, nextId: nextId)
+                nextId = nil
             case "h2":
-                 let text = element.ownText()
+                let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header2)
-                 self.processObjects(objects: objects, withParentType: .header2, nextId: nextId)
-                 nextId = nil
+                self.processObjects(objects: objects, withParentType: .header2, nextId: nextId)
+                nextId = nil
             case "h3":
                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header3)
                 self.processObjects(objects: objects, withParentType: .header3, nextId: nextId)
-                 nextId = nil
+                nextId = nil
             case "h4":
-                 let text = element.ownText()
+                let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
-                 self.processObjects(objects: objects, withParentType: .header4, nextId: nextId)
-                 nextId = nil
+                self.processObjects(objects: objects, withParentType: .header4, nextId: nextId)
+                nextId = nil
             case "div":
                 let id = element.id()
                 if id.count > 0{
@@ -257,9 +302,6 @@ class InterfaceController: WKInterfaceController {
             
             
         }
-        self.setupPage(withElements: self.elements)
-        
-        
     }
     func setupPage(withElements elements: [ElementObject]){
         for (index, element) in elements.enumerated(){
@@ -447,7 +489,11 @@ class InterfaceController: WKInterfaceController {
     }
     func fetchWebsite(fromUrl url: URL){
         self.networkStatus = .loading
-        URLSession.shared.dataTask(with: url, completionHandler: {data, response, error in
+        var request = URLRequest(url: url)
+        if let customUserAgent = self.userAgent{
+            request.setValue(customUserAgent, forHTTPHeaderField: "User-Agent")
+        }
+        URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
             if let error = error{
                 self.networkStatus = .failed(error.localizedDescription)
             }
