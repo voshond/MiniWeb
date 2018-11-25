@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED07EB5221905AB20057800A /* inputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED07EB5121905AB20057800A /* inputController.swift */; };
+		ED142E0B21AA54460058C052 /* CodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED142E0921AA543E0058C052 /* CodeExtensions.swift */; };
 		ED4699DB2158EBE9008BA35B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699DA2158EBE9008BA35B /* AppDelegate.swift */; };
 		ED4699DD2158EBE9008BA35B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699DC2158EBE9008BA35B /* ViewController.swift */; };
 		ED4699E02158EBE9008BA35B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699DE2158EBE9008BA35B /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		D3B6640C32BD3D8578B41E45 /* Pods-PseudoWeb WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb WatchKit App.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb WatchKit App/Pods-PseudoWeb WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		E28E7592959C10AFD89FA491 /* Pods-PseudoWeb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PseudoWeb.release.xcconfig"; path = "Pods/Target Support Files/Pods-PseudoWeb/Pods-PseudoWeb.release.xcconfig"; sourceTree = "<group>"; };
 		ED07EB5121905AB20057800A /* inputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputController.swift; sourceTree = "<group>"; };
+		ED142E0921AA543E0058C052 /* CodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeExtensions.swift; sourceTree = "<group>"; };
 		ED4699D72158EBE9008BA35B /* MiniWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4699DA2158EBE9008BA35B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED4699DC2158EBE9008BA35B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		ED4699CE2158EBE9008BA35B = {
 			isa = PBXGroup;
 			children = (
+				ED142E0921AA543E0058C052 /* CodeExtensions.swift */,
 				ED4699D92158EBE9008BA35B /* PseudoWeb */,
 				ED4699ED2158EBEB008BA35B /* PseudoWeb WatchKit App */,
 				ED4699FC2158EBEB008BA35B /* PseudoWeb WatchKit Extension */,
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED142E0B21AA54460058C052 /* CodeExtensions.swift in Sources */,
 				ED710B0B2193B0910095B601 /* ElementType.swift in Sources */,
 				ED710B112193B0B40095B601 /* ElementObject.swift in Sources */,
 				ED710B0D2193B09F0095B601 /* Image.swift in Sources */,

@@ -72,13 +72,13 @@ class MiniWebController: WKInterfaceController {
                 self.loadingIndicator.setHeight(50)
                 self.loadingIndicator.setWidth(50)
                 self.loadFailedLabel.setHidden(false)
-
-
+                
+                
             case .loaded:
                 self.indicatorGroup.setHidden(true)
                 self.loadingIndicator.stopAnimating()
                 self.WebsiteTabel.setHidden(false)
-
+                
                 self.loadFailedLabel.setHidden(true)
             case .unknown:
                 print()
@@ -94,7 +94,7 @@ class MiniWebController: WKInterfaceController {
             self.fetchWebsite(fromUrl: url)
             self.parentUrl =  (url.absoluteString.starts(with: "http") ? "" : "http://") + (url.absoluteString)
             self.setTitle(url.host)
-
+            
         }
         
         //Or if it was passed a string
@@ -104,12 +104,12 @@ class MiniWebController: WKInterfaceController {
                 self.fetchWebsite(fromUrl: testUrl)
                 self.setTitle(testUrl.host)
                 self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
-//                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
-//
-//                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
-//                    self.processHtml(html: htmlContents)
-//
-//                }
+                //                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
+                //
+                //                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
+                //                    self.processHtml(html: htmlContents)
+                //
+                //                }
             }
         }
         
@@ -117,13 +117,13 @@ class MiniWebController: WKInterfaceController {
     }
     
     /*
-        Article Detector
-        This function takes an element and attmepts to determine whether or not the element contains an article
-        1. Eensures it is a <div>
-        2. See if the character count is above 2000 (roughly 400 word article)
-        3. See if the <div> class is forbidden or not
-        4. Checks if the <div> contains a header
-    */
+     Article Detector
+     This function takes an element and attmepts to determine whether or not the element contains an article
+     2. Ensures it is a <div>
+     3. See if the character count is above 2000 (roughly 400 word article)
+     4. See if the <div> class is forbidden or not
+     5. Checks if the <div> contains a header
+     */
     func isValidDiv(element: Element) -> Bool{
         //1
         if !(element.tagName() == "div"){
@@ -164,10 +164,10 @@ class MiniWebController: WKInterfaceController {
         self.originalContents = children
         //Checks for an article
         
-        if let div = children.first(where: {isValidDiv(element: $0)}){
+        if let article = children.first(where: {$0.tagName() == "article"}) ?? children.first(where: {isValidDiv(element: $0)}){
             self.addMenuItem(with: WKMenuItemIcon.resume, title: "View Entire Page", action: #selector(viewWithoutDetection))
             //If an article is found, get all the elements
-            if let allElemnents = try? div.getAllElements(){
+            if let allElemnents = try? article.getAllElements(){
                 //Overwrite the list of elements with only the articles contents
                 children = allElemnents
             }
@@ -234,6 +234,7 @@ class MiniWebController: WKInterfaceController {
                 nextId = nil
             case "caption", "figcaption":
                 self.elements.append(ElementObject(type: .caption, text: element.ownText(), id: nextId))
+                
                 nextId = nil
             case "a":
                 //If a links text can be found as well as the href, begin processing it
@@ -262,7 +263,10 @@ class MiniWebController: WKInterfaceController {
                 nextId = nil
             case "p":
                 let text = element.ownText()
-                if ((try? element.className()) ?? "").contains("caption"){ //If the class contains "caption", treat it like a caption and not text
+                if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class contains "caption", treat it like a caption and not text
+                    
+                    
+                    
                     self.elements.append(ElementObject(type: .caption, text: element.ownText()))
                     continue
                 }
@@ -510,7 +514,7 @@ class MiniWebController: WKInterfaceController {
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         if let row = self.WebsiteTabel.rowController(at: rowIndex) as? LinkCell{
             //If a URL can be found in the row, load the linkViewer (self) and begin loading the URL
-                if let url = row.url{
+            if let url = row.url{
                 if url.absoluteString.starts(with: "#"){
                     if let index = self.addressLookup[url.absoluteString]{
                         self.WebsiteTabel.scrollToRow(at: index)
@@ -556,163 +560,5 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         return true
     default:
         return false
-    }
-}
-
-extension UIImage {
-    
-    public class func gifImageWithData(_ data: Data) -> UIImage? {
-        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("image doesn't exist")
-            return nil
-        }
-        
-        return UIImage.animatedImageWithSource(source)
-    }
-    
-    public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL: URL = URL(string: gifUrl)
-            else {
-                print("image named \"\(gifUrl)\" doesn't exist")
-                return nil
-        }
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("image named \"\(gifUrl)\" into NSData")
-            return nil
-        }
-        
-        return gifImageWithData(imageData)
-    }
-    
-    public class func gifImageWithName(_ name: String) -> UIImage? {
-        guard let bundleURL = Bundle.main
-            .url(forResource: name, withExtension: "gif") else {
-                print("SwiftGif: This image named \"\(name)\" does not exist")
-                return nil
-        }
-        guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
-            return nil
-        }
-        
-        return gifImageWithData(imageData)
-    }
-    
-    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
-        var delay = 0.1
-        
-        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-        let gifProperties: CFDictionary = unsafeBitCast(
-            CFDictionaryGetValue(cfProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
-            to: CFDictionary.self)
-        
-        var delayObject: AnyObject = unsafeBitCast(
-            CFDictionaryGetValue(gifProperties,
-                                 Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
-            to: AnyObject.self)
-        if delayObject.doubleValue == 0 {
-            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-                                                             Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
-        }
-        
-        delay = delayObject as! Double
-        
-        if delay < 0.1 {
-            delay = 0.1
-        }
-        
-        return delay
-    }
-    
-    class func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
-        var a = a
-        var b = b
-        if b == nil || a == nil {
-            if b != nil {
-                return b!
-            } else if a != nil {
-                return a!
-            } else {
-                return 0
-            }
-        }
-        
-        if a < b {
-            let c = a
-            a = b
-            b = c
-        }
-        
-        var rest: Int
-        while true {
-            rest = a! % b!
-            
-            if rest == 0 {
-                return b!
-            } else {
-                a = b
-                b = rest
-            }
-        }
-    }
-    
-    class func gcdForArray(_ array: Array<Int>) -> Int {
-        if array.isEmpty {
-            return 1
-        }
-        
-        var gcd = array[0]
-        
-        for val in array {
-            gcd = UIImage.gcdForPair(val, gcd)
-        }
-        
-        return gcd
-    }
-    
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
-        let count = CGImageSourceGetCount(source)
-        var images = [CGImage]()
-        var delays = [Int]()
-        
-        for i in 0..<count {
-            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
-                images.append(image)
-            }
-            
-            let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
-                                                            source: source)
-            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
-        }
-        
-        let duration: Int = {
-            var sum = 0
-            
-            for val: Int in delays {
-                sum += val
-            }
-            
-            return sum
-        }()
-        
-        let gcd = gcdForArray(delays)
-        var frames = [UIImage]()
-        
-        var frame: UIImage
-        var frameCount: Int
-        for i in 0..<count {
-            frame = UIImage(cgImage: images[Int(i)])
-            frameCount = Int(delays[Int(i)] / gcd)
-            
-            for _ in 0..<frameCount {
-                frames.append(frame)
-            }
-        }
-        
-        let animation = UIImage.animatedImage(with: frames,
-                                              duration: Double(duration) / 1000.0)
-        
-        return animation
     }
 }
