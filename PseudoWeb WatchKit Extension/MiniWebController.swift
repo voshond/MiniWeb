@@ -263,7 +263,7 @@ class MiniWebController: WKInterfaceController {
                 nextId = nil
             case "p":
                 let text = element.ownText()
-                if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class contains "caption", treat it like a caption and not text
+                if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class (or parent tag) contains "caption", treat it like a caption and not text
                     
                     
                     

@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		ED07EB5221905AB20057800A /* inputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED07EB5121905AB20057800A /* inputController.swift */; };
 		ED142E0B21AA54460058C052 /* CodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED142E0921AA543E0058C052 /* CodeExtensions.swift */; };
+		ED2872DC21ABFFC100444CDE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699EE2158EBEB008BA35B /* Interface.storyboard */; };
 		ED4699DB2158EBE9008BA35B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699DA2158EBE9008BA35B /* AppDelegate.swift */; };
 		ED4699DD2158EBE9008BA35B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699DC2158EBE9008BA35B /* ViewController.swift */; };
 		ED4699E02158EBE9008BA35B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699DE2158EBE9008BA35B /* Main.storyboard */; };
 		ED4699E22158EBEB008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED4699E12158EBEB008BA35B /* Assets.xcassets */; };
 		ED4699E52158EBEB008BA35B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699E32158EBEB008BA35B /* LaunchScreen.storyboard */; };
 		ED4699EA2158EBEB008BA35B /* MiniWeb WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED4699E92158EBEB008BA35B /* MiniWeb WatchKit App.app */; };
-		ED4699F02158EBEB008BA35B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4699EE2158EBEB008BA35B /* Interface.storyboard */; };
 		ED4699F22158EBEB008BA35B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED4699F12158EBEB008BA35B /* Assets.xcassets */; };
 		ED4699F92158EBEB008BA35B /* MiniWeb WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ED4699F82158EBEB008BA35B /* MiniWeb WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ED4699FE2158EBEB008BA35B /* MiniWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4699FD2158EBEB008BA35B /* MiniWebController.swift */; };
@@ -357,8 +357,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2872DC21ABFFC100444CDE /* Interface.storyboard in Resources */,
 				ED4699F22158EBEB008BA35B /* Assets.xcassets in Resources */,
-				ED4699F02158EBEB008BA35B /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,7 +650,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -673,7 +673,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -699,7 +699,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -726,7 +726,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.PseudoWeb.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.willbishop.MiniWeb.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

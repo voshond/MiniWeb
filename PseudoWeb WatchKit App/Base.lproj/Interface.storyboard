@@ -8,10 +8,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
-        <!--Input Controller-->
+        <!--MiniWeb-->
         <scene sceneID="eJe-ui-NK3">
             <objects>
-                <controller id="a2S-CK-M92" customClass="inputController" customModule="MiniWeb_WatchKit_App" customModuleProvider="target">
+                <controller title="MiniWeb" id="a2S-CK-M92" customClass="inputController" customModule="MiniWeb_WatchKit_Extension">
                     <items>
                         <group width="1" height="46" alignment="left" id="KgP-UQ-H3t">
                             <items>
