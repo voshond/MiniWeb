@@ -52,8 +52,6 @@ class MiniWebController: WKInterfaceController {
     var originalContents = Elements()
     var originalHtml: String? = nil
     
-    //Custom User-Agent
-    var userAgent: String? = nil
     
     var networkStatus: NetworkStatus = .unknown {
         didSet{
@@ -493,22 +491,15 @@ class MiniWebController: WKInterfaceController {
     }
     func fetchWebsite(fromUrl url: URL){
         self.networkStatus = .loading
-        var request = URLRequest(url: url)
-        if let customUserAgent = self.userAgent{
-            request.setValue(customUserAgent, forHTTPHeaderField: "User-Agent")
-        }
-        URLSession.shared.dataTask(with: request, completionHandler: {data, response, error in
-            if let error = error{
-                self.networkStatus = .failed(error.localizedDescription)
+        NetworkManager.fetchWebsite(fromUrl: url, returnString: {html in
+            self.processHtml(html: html)
+        }, handleError: { error in
+            switch error{
+            case .failed(let reason):
+                self.networkStatus = .failed(reason)
             }
-            guard let data = data else {return}
-            //Convert the returned data to a String
-            guard let responseString = String(data: data, encoding: String.Encoding.utf8) else {return}
-            
-            //Begin processing it
-            self.processHtml(html: responseString)
-            
-        }).resume()
+        })
+        
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
