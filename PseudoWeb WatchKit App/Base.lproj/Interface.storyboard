@@ -53,7 +53,7 @@
                     <items>
                         <table alignment="left" id="eLP-3x-0Yr">
                             <items>
-                                <tableRow identifier="TitleCell" selectable="NO" id="3Zx-ZU-tY1" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="TitleCell" selectable="NO" id="3Zx-ZU-tY1" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="hsZ-2E-Pk3">
                                         <items>
                                             <label alignment="left" text="Title" numberOfLines="0" id="Ya0-im-vlR">
@@ -66,7 +66,7 @@
                                         <outlet property="cellText" destination="Ya0-im-vlR" id="CPp-Uw-WcL"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="SeperatorCell" selectable="NO" id="jJ7-tb-pbJ" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="SeperatorCell" selectable="NO" id="jJ7-tb-pbJ" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Fba-Ny-2wI">
                                         <items>
                                             <separator alignment="left" id="Woe-4j-xLS"/>
@@ -74,7 +74,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </group>
                                 </tableRow>
-                                <tableRow identifier="TextCell" selectable="NO" id="8my-jx-9ws" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="TextCell" selectable="NO" id="8my-jx-9ws" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="4oW-6f-OX5">
                                         <items>
                                             <label alignment="left" text="Paragraph" numberOfLines="0" id="kpW-CN-IYr"/>
@@ -85,7 +85,7 @@
                                         <outlet property="cellText" destination="kpW-CN-IYr" id="VGf-mz-wW0"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="BoldCell" selectable="NO" id="4k4-S7-h5L" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="BoldCell" selectable="NO" id="4k4-S7-h5L" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Fc0-FT-96e">
                                         <items>
                                             <label alignment="left" text="Bold" numberOfLines="0" id="DAl-zm-4AJ">
@@ -98,7 +98,7 @@
                                         <outlet property="cellText" destination="DAl-zm-4AJ" id="4AG-H5-QKl"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="QuoteCell" selectable="NO" id="pQ7-Qf-369" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="QuoteCell" selectable="NO" id="pQ7-Qf-369" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="0z2-zm-P4i">
                                         <items>
                                             <separator alignment="left" id="7ae-u0-2a3"/>
@@ -114,7 +114,7 @@
                                         <outlet property="cellText" destination="hPA-2N-cum" id="bQ1-jI-FEZ"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="CaptionCell" selectable="NO" id="Rj9-OI-PyY" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="CaptionCell" selectable="NO" id="Rj9-OI-PyY" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Bwx-OE-vcD">
                                         <items>
                                             <label alignment="left" text="Caption" numberOfLines="0" id="Kx4-JL-sih">
@@ -128,13 +128,13 @@
                                         <outlet property="cellText" destination="Kx4-JL-sih" id="gNk-vK-D0t"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="LineBreakCell" selectable="NO" id="Arg-xX-hyc" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="LineBreakCell" selectable="NO" id="Arg-xX-hyc" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="10" alignment="left" id="iX4-f2-HQ5">
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <edgeInsets key="margins" left="12" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                 </tableRow>
-                                <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="HeaderCell" selectable="NO" id="Xvd-2g-g9h" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="Chl-Oc-8nV">
                                         <items>
                                             <label alignment="left" text="Header" numberOfLines="0" id="ecM-8O-jqT">
@@ -147,7 +147,7 @@
                                         <outlet property="cellText" destination="ecM-8O-jqT" id="Sdk-W7-h3G"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="Header2Cell" selectable="NO" id="RBH-jt-E4N" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="Header2Cell" selectable="NO" id="RBH-jt-E4N" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="rTD-2f-ls4">
                                         <items>
                                             <label alignment="left" text="Header" numberOfLines="0" id="zPZ-Y1-WjX">
@@ -160,7 +160,7 @@
                                         <outlet property="cellText" destination="zPZ-Y1-WjX" id="czf-9w-Mut"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="Header3Cell" selectable="NO" id="w3V-wn-wym" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="Header3Cell" selectable="NO" id="w3V-wn-wym" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="cca-wy-VpY">
                                         <items>
                                             <label alignment="left" text="Header" numberOfLines="0" id="P9u-yH-JWM">
@@ -173,7 +173,7 @@
                                         <outlet property="cellText" destination="P9u-yH-JWM" id="12J-GR-eLa"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="Header4Cell" selectable="NO" id="Vr5-s4-BR4" customClass="TextCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="Header4Cell" selectable="NO" id="Vr5-s4-BR4" customClass="TextCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="QQ0-Zx-WuJ">
                                         <items>
                                             <label alignment="left" text="Header" numberOfLines="0" id="622-X1-adt">
@@ -186,7 +186,7 @@
                                         <outlet property="cellText" destination="622-X1-adt" id="Ykm-NW-taL"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="LinkCell" id="Ebi-q5-mhg" customClass="LinkCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="LinkCell" id="Ebi-q5-mhg" customClass="LinkCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="9XN-Du-LZ5">
                                         <items>
                                             <label alignment="left" text="Link" numberOfLines="0" id="hO4-eF-Blk">
@@ -200,7 +200,7 @@
                                         <outlet property="linkText" destination="hO4-eF-Blk" id="zbN-Fd-RHA"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="ImageCell" selectable="NO" id="Ibd-f7-kPB" customClass="ImageCell" customModule="PseudoWeb_WatchKit_Extension">
+                                <tableRow identifier="ImageCell" selectable="NO" id="Ibd-f7-kPB" customClass="ImageCell" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="W3r-IJ-mbp">
                                         <items>
                                             <imageView alignment="left" id="xXv-Tw-xg4"/>

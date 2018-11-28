@@ -33,7 +33,7 @@ class NetworkManager{
             
             //Begin processing it
             returnString(responseString)
-        })
+        }).resume()
         
     }
 }
