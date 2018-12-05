@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Link{
+struct LinkType{
     var startText: String? = nil
     var startIndex: Int? = nil
     var linkText: String? = nil

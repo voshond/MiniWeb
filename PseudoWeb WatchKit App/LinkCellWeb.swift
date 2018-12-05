@@ -9,7 +9,7 @@
 import Foundation
 import WatchKit
 
-class LinkCell: NSObject{
+class LinkCellWeb: NSObject{
     
     @IBOutlet weak var linkText: WKInterfaceLabel!
     var url: URL?
