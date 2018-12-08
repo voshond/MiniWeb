@@ -122,7 +122,11 @@ class MiniWebController: WKInterfaceController {
      4. See if the <div> class is forbidden or not
      5. Checks if the <div> contains a header
      */
-    func isValidDiv(element: Element) -> Bool{
+    func isValidArticle(element: Element) -> Bool{
+        
+        if (try? element.className()) == "article" || element.tagName() == "article"{
+            return true
+        }
         //1
         if !(element.tagName() == "div"){
             return false
@@ -135,7 +139,7 @@ class MiniWebController: WKInterfaceController {
         if forbiddenClasses.contains((try? element.className()) ?? ""){
             return false
         }
-        guard let allElements = try? element.getAllElements() else {return false}
+        guard let allElements = try? element.children() else {return false}
         //4
         return allElements.contains(where: {
             $0.tagName() == "h"  ||
@@ -162,7 +166,7 @@ class MiniWebController: WKInterfaceController {
         self.originalContents = children
         //Checks for an article
         
-        if let article = children.first(where: {$0.tagName() == "article"}) ?? children.first(where: {isValidDiv(element: $0)}){
+        if let article = children.first(where: {isValidArticle(element: $0)}){
             self.addMenuItem(with: WKMenuItemIcon.resume, title: "View Entire Page", action: #selector(viewWithoutDetection))
             //If an article is found, get all the elements
             if let allElemnents = try? article.getAllElements(){
@@ -262,9 +266,6 @@ class MiniWebController: WKInterfaceController {
             case "p":
                 let text = element.ownText()
                 if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class (or parent tag) contains "caption", treat it like a caption and not text
-                    
-                    
-                    
                     self.elements.append(ElementObject(type: .caption, text: element.ownText()))
                     continue
                 }
