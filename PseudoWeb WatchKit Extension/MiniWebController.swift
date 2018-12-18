@@ -265,8 +265,13 @@ class MiniWebController: WKInterfaceController {
                 nextId = nil
             case "p":
                 guard let text = try? element.text() else {continue}
-                if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class (or parent tag) contains "caption", treat it like a caption and not text
+                if ((try? element.className()) ?? "").contains("caption") ||
+                    element.parent()?.tagName().contains("caption") ?? false { //If the class (or parent tag) contains "caption", treat it like a caption and not text
                     self.elements.append(ElementObject(type: .caption, text: element.ownText()))
+                    continue
+                }
+                if element.parent()?.tagName().contains("quote") ?? false{
+                    self.elements.append(ElementObject(type: .quote, text: text))
                     continue
                 }
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
