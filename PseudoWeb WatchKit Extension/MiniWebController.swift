@@ -98,16 +98,16 @@ class MiniWebController: WKInterfaceController {
         //Or if it was passed a string
         if let url = context as? String{
             if url == "localTest"{
-                let testUrl = URL(string: "http://whatsmyuseragent.org")!
-                self.fetchWebsite(fromUrl: testUrl)
-                self.setTitle(testUrl.host)
-                self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
-                //                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
-                //
-                //                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
-                //                    self.processHtml(html: htmlContents)
-                //
-                //                }
+//                let testUrl = URL(string: "https://9to5mac.com/2018/12/04/directv-hulu-pause-ads/")!
+//                self.fetchWebsite(fromUrl: testUrl)
+//                self.setTitle(testUrl.host)
+//                self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
+                                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
+                
+                                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
+                                    self.processHtml(html: htmlContents)
+                
+                                }
             }
         }
         
@@ -264,7 +264,7 @@ class MiniWebController: WKInterfaceController {
                 self.elements.append(ElementObject(type: .seperator, id: nextId))
                 nextId = nil
             case "p":
-                let text = element.ownText()
+                guard let text = try? element.text() else {continue}
                 if ((try? element.className()) ?? "").contains("caption") || element.parent()?.tagName().contains("caption") ?? false{ //If the class (or parent tag) contains "caption", treat it like a caption and not text
                     self.elements.append(ElementObject(type: .caption, text: element.ownText()))
                     continue
@@ -409,9 +409,19 @@ class MiniWebController: WKInterfaceController {
                     guard let startText = link.startText, let linkText = link.linkText, let endtext = link.endText else {return}
                     //Create a attributed string of the link as well as any leading or trailing text.
                     let mutedText = NSMutableAttributedString(string: startText + linkText + endtext)
+                    
+                    //Set the entire text part to white, so it still appears as a link in the storyboard
+                    mutedText.addAttributes([
+                        NSAttributedString.Key.foregroundColor: UIColor.white
+                        ], range:
+                        NSRange(location: 0, length: (startText + linkText + endtext).count)
+                    )
                     //Set the actual link part of the 'link' to blue.
                     mutedText.addAttributes([
-                        NSAttributedString.Key.foregroundColor: UIColor(red:0.11, green:0.63, blue:0.95, alpha:1.0)], range: NSRange(location: link.startIndex!, length: linkText.count))
+                        NSAttributedString.Key.foregroundColor: UIColor(red:0.11, green:0.63, blue:0.95, alpha:1.0)
+                    ], range:
+                        NSRange(location: link.startIndex!, length: linkText.count)
+                    )
                     //Create a link row
                     self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "LinkCell")
                     if let row = self.WebsiteTabel.rowController(at: index) as? LinkCellWeb{
@@ -435,13 +445,12 @@ class MiniWebController: WKInterfaceController {
     func findLinksIn(element: Element, withText text: String, withType type: ElementType) -> [ElementObject]{
         var objects = [ElementObject]()
         //Attempt to find any links
-        if let links = try? element.getElementsByTag("a"){
-            let asArray = links.array()
-            if asArray.count == 0{
+        if let links = try? element.getElementsByTag("a").array(){
+            if links.count == 0{
                 //if there is none, take the text that was passed in and create a object of the passed type
                 objects.append(ElementObject(type: type, text: text))
             }
-            for link in asArray{
+            for link in links{
                 //Add the link to the process elements array to prevent duplicates
                 self.processedElements.append(link)
                 if let linkText = try? link.text(), let linkHref = try? link.attr("href"){

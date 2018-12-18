@@ -186,7 +186,7 @@
                                         <outlet property="cellText" destination="622-X1-adt" id="Ykm-NW-taL"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="LinkCell" id="Ebi-q5-mhg" customClass="LinkCell" customModule="MiniWeb_WatchKit_Extension">
+                                <tableRow identifier="LinkCell" id="Ebi-q5-mhg" customClass="LinkCellWeb" customModule="MiniWeb_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="9XN-Du-LZ5">
                                         <items>
                                             <label alignment="left" text="Link" numberOfLines="0" id="hO4-eF-Blk">
