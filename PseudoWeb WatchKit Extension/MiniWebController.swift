@@ -98,16 +98,16 @@ class MiniWebController: WKInterfaceController {
         //Or if it was passed a string
         if let url = context as? String{
             if url == "localTest"{
-//                let testUrl = URL(string: "https://9to5mac.com/2018/12/04/directv-hulu-pause-ads/")!
-//                self.fetchWebsite(fromUrl: testUrl)
-//                self.setTitle(testUrl.host)
-//                self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
-                                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
-                
-                                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
-                                    self.processHtml(html: htmlContents)
-                
-                                }
+                let testUrl = URL(string: "https://9to5mac.com/2018/12/04/directv-hulu-pause-ads/")!
+                self.fetchWebsite(fromUrl: testUrl)
+                self.setTitle(testUrl.host)
+                self.parentUrl =  (testUrl.absoluteString.starts(with: "http") ? "" : "http://") + (testUrl.absoluteString)
+//                                guard let htmlFile = Bundle.main.path(forResource: "TestHtml", ofType: "html") else {return}
+//
+//                                if let htmlContents = try? String(contentsOf: URL(fileURLWithPath: htmlFile), encoding: String.Encoding.utf8){
+//                                    self.processHtml(html: htmlContents)
+//
+//                                }
             }
         }
         
@@ -450,29 +450,56 @@ class MiniWebController: WKInterfaceController {
                 //if there is none, take the text that was passed in and create a object of the passed type
                 objects.append(ElementObject(type: type, text: text))
             }
-            for link in links{
+            for (index, link) in links.enumerated(){
+                
                 //Add the link to the process elements array to prevent duplicates
                 self.processedElements.append(link)
                 if let linkText = try? link.text(), let linkHref = try? link.attr("href"){
                     //Take the index that the linkText starts at in the regular text
-                    if let startIndex = text.index(of: linkText){
+                    if var startIndex = text.index(of: linkText){
                         //Find where it finishes
                         let endIndex = startIndex + linkText.count
                         //Take all the text from before the link begins
-                        let beforeLink = text[0 ..< startIndex]
+                        var beforeLink = text[0 ..< startIndex]
                         var afterLink = ""
-                        if linkText.count == endIndex{
-                            
-                        } else {
+                        if !(linkText.count == endIndex){
                             //Checks is the upper bound (text.count - 1) is greater than the lower bound (endIndex), if it is return "", else return the difference
                             //Take all the text from after the link ends
+                            
                             afterLink = (text.count - 1) > endIndex ? text[endIndex ... (text.count - 1)] : ""
-                            
-                            
+                        }
+                        if index == links.endIndex - 1{
+                            if let previousLink = objects.last?.Link{
+                                if let oldEndIndex = previousLink.endIndex{
+                                    beforeLink = text[oldEndIndex ... startIndex - 1].replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+                                    if let newStartIndex = text.index(of: linkText){
+                                        startIndex = beforeLink.count
+                                    }
+                                }
+                                
+                            }
+                        } else if links.startIndex != index{
+                            beforeLink = ""
+                            afterLink = ""
+                            if let previousLink = objects.last?.Link{
+                                if let oldEndIndex = previousLink.endIndex{
+                                    beforeLink = text[oldEndIndex ... startIndex - 1].replacingOccurrences(of: "^\\s+", with: "", options: .regularExpression)
+                                    if let newStartIndex = text.index(of: linkText){
+                                        startIndex = beforeLink.count
+                                    }
+                                }
+                                
+                            } else {
+                                beforeLink = ""
+                                startIndex = 0
+                                
+                            }
+                        } else {
+                            afterLink = ""
                         }
                         //Create a link object
-                        let link = LinkType(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: (text.count - 1), url: URL(string: linkHref)!)
-                        self.elements.append(ElementObject(type: .link, Link: link))
+                        let link = LinkType(startText: beforeLink, startIndex: startIndex, linkText: linkText, endText: afterLink, endIndex: endIndex, url: URL(string: linkHref)!)
+                        objects.append(ElementObject(type: .link, Link: link))
                         
                     }
                     
@@ -493,9 +520,14 @@ class MiniWebController: WKInterfaceController {
                 self.elements.append(ElementObject(type: type, text: concatenatedText, id: nextId))
             }
             if element.type == .link{
-                guard let concatenatedText = element.text else {return}
-                guard let url = element.image else {return}
-                self.elements.append(ElementObject(type: .link, text: concatenatedText, image: url, id: nextId))
+                guard let startIndex = element.Link?.startIndex, let endIndex = element.Link?.endIndex else {return}
+                let startText = element.Link?.startText ?? ""
+                let linkText = element.Link?.linkText ?? ""
+                let endText = element.Link?.endText ?? ""
+                let concatenatedText = startText + linkText + endText
+                guard let url = element.Link?.url else {return}
+                let link = LinkType(startText: startText, startIndex: startIndex, linkText: linkText, endText: endText, endIndex: endIndex, url: url)
+                self.elements.append(ElementObject(type: .link, Link: link, id: nextId))
             }
         }
     }
@@ -721,3 +753,4 @@ extension UIImage {
         return animation
     }
 }
+
