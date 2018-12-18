@@ -23,4 +23,5 @@ enum ElementType{
     case lineBreak
     case link
     case seperator
+    case code
 }

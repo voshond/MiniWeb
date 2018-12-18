@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "525"
             endingLineNumber = "525"
-            landmarkName = "processObjects(objects:withParentType:nextId:)"
+            landmarkName = "findLinksIn(element:withText:withType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "522"
             endingLineNumber = "522"
-            landmarkName = "processObjects(objects:withParentType:nextId:)"
+            landmarkName = "findLinksIn(element:withText:withType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "532"
             endingLineNumber = "532"
-            landmarkName = "processObjects(objects:withParentType:nextId:)"
+            landmarkName = "findLinksIn(element:withText:withType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "458"
             endingLineNumber = "458"
-            landmarkName = "findLinksIn(element:withText:withType:)"
+            landmarkName = "setupPage(withElements:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "556"
             endingLineNumber = "556"
-            landmarkName = "table(_:didSelectRowAt:)"
+            landmarkName = "fetchWebsite(fromUrl:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

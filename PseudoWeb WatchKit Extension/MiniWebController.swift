@@ -276,7 +276,7 @@ class MiniWebController: WKInterfaceController {
                 }
                 let objects = self.findLinksIn(element: element, withText: text, withType: .text)
                 self.processObjects(objects: objects, withParentType: .text, nextId: nextId)
-                nextId = nil
+                
                 
             case "h", "h1":
                 let text = element.ownText()
@@ -297,6 +297,11 @@ class MiniWebController: WKInterfaceController {
                 let text = element.ownText()
                 let objects = self.findLinksIn(element: element, withText: text, withType: .header4)
                 self.processObjects(objects: objects, withParentType: .header4, nextId: nextId)
+                nextId = nil
+            case "pre":
+                guard let text = try? element.text() else {continue}
+                let object = ElementObject(type: .code, text: text)
+                self.processObjects(objects: [object], withParentType: .code, nextId: nextId)
                 nextId = nil
             case "div":
                 let id = element.id()
@@ -442,6 +447,13 @@ class MiniWebController: WKInterfaceController {
                         row.cellText.setText(text)
                     }
                     
+                }
+            case .code:
+                if let text = element.text{
+                    self.WebsiteTabel.insertRows(at: IndexSet(index ... index), withRowType: "CodeCell")
+                    if let row = self.WebsiteTabel.rowController(at: index) as? TextCell{
+                        row.cellText.setText(text)
+                    }
                 }
             }
         }
